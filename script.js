@@ -42,7 +42,7 @@
     },
     spring: {
       label: "봄",
-      fonts: "family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,600&family=Gowun+Dodum",
+      fonts: "family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400",
       fall: "blossom",
       kicker: "Our Spring Wedding",
     },
@@ -65,16 +65,16 @@
     const box = document.createElement("div");
     box.className = "fall";
     box.setAttribute("aria-hidden", "true");
-    const n = { snow: 34, ginkgo: 9, blossom: 12 }[kind];
+    const n = { snow: 34, ginkgo: 9, blossom: 10 }[kind];
     for (let i = 0; i < n; i++) {
       const p = document.createElement("i");
       // 은행잎은 천천히, 고즈넉하게
-      const dur = { snow: 9, ginkgo: 20, blossom: 11 }[kind] + Math.random() * 10;
+      const dur = { snow: 9, ginkgo: 20, blossom: 16 }[kind] + Math.random() * 10;
       p.style.left = `${Math.random() * 100}%`;
       p.style.animationDuration = `${dur}s`;
       p.style.animationDelay = `${-Math.random() * dur}s`;
       p.style.setProperty("--sway", `${(Math.random() - 0.5) * 80}px`);
-      const [min, range] = { snow: [2, 4], ginkgo: [11, 6], blossom: [10, 9] }[kind];
+      const [min, range] = { snow: [2, 4], ginkgo: [11, 6], blossom: [9, 6] }[kind];
       p.style.setProperty("--s", `${min + Math.random() * range}px`);
       box.appendChild(p);
     }
