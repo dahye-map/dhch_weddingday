@@ -42,7 +42,8 @@
     },
     sky: {
       label: "스카이",
-      fonts: "family=Instrument+Serif:ital@0;1",
+      fonts: "family=Instrument+Serif:ital@0;1&family=Special+Elite&family=Gowun+Batang:wght@400;700",
+      kicker: "PAR AVION · WEDDING MAIL",
     },
     spring: {
       label: "봄",
