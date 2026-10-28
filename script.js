@@ -35,7 +35,14 @@
     romantic: { label: "로맨틱", fonts: "family=Great+Vibes&family=Gowun+Batang:wght@400;700", fall: "petal" },
     minimal: { label: "미니멀", fonts: "family=Montserrat:wght@300;400;500;600" },
     winter: { label: "윈터", fonts: "family=Playfair+Display:ital,wght@0,400;0,500;1,400", fall: "snow" },
+    ginkgo: {
+      label: "은행잎",
+      fonts: "family=Song+Myung&family=Gowun+Batang:wght@400;700",
+      fall: "ginkgo",
+      kicker: "가을, 은행나무 아래에서",
+    },
   };
+  const defaultKicker = document.querySelector(".cover-kicker").textContent;
   const params = new URLSearchParams(location.search);
   const loadedFonts = {};
 
@@ -47,15 +54,16 @@
     const box = document.createElement("div");
     box.className = "fall";
     box.setAttribute("aria-hidden", "true");
-    const n = kind === "snow" ? 34 : 16;
+    const n = { snow: 34, petal: 16, ginkgo: 14 }[kind];
     for (let i = 0; i < n; i++) {
       const p = document.createElement("i");
-      const dur = (kind === "snow" ? 9 : 11) + Math.random() * 9;
+      // 은행잎은 천천히, 고즈넉하게
+      const dur = { snow: 9, petal: 11, ginkgo: 15 }[kind] + Math.random() * 10;
       p.style.left = `${Math.random() * 100}%`;
       p.style.animationDuration = `${dur}s`;
       p.style.animationDelay = `${-Math.random() * dur}s`;
       p.style.setProperty("--sway", `${(Math.random() - 0.5) * 80}px`);
-      p.style.setProperty("--s", `${2 + Math.random() * 4}px`);
+      p.style.setProperty("--s", kind === "ginkgo" ? `${13 + Math.random() * 10}px` : `${2 + Math.random() * 4}px`);
       box.appendChild(p);
     }
     cover.prepend(box);
@@ -79,6 +87,7 @@
       document.head.appendChild(link);
       loadedFonts[t] = true;
     }
+    document.querySelector(".cover-kicker").textContent = THEMES[t].kicker || defaultKicker;
     startFall(THEMES[t].fall);
     document.querySelectorAll(".theme-picker button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.theme === t));
   }

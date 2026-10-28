@@ -1,8 +1,8 @@
 // 청첩장 기본 정보 — 이 파일만 수정하면 됩니다.
 window.WEDDING_CONFIG = {
-  // 디자인 테마: "classic" | "romantic" | "minimal" | "winter"
+  // 디자인 테마: "classic" | "romantic" | "minimal" | "winter" | "ginkgo"
   // 주소 뒤에 ?theme=romantic 처럼 붙여 열면 화면 아래에 테마 비교 버튼이 나옵니다.
-  theme: "classic",
+  theme: "ginkgo",
 
   groom: { name: "신랑이름", en: "Groom", parents: "아버지 · 어머니의 아들" },
   bride: { name: "신부이름", en: "Bride", parents: "아버지 · 어머니의 딸" },

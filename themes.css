@@ -182,3 +182,104 @@
   opacity: .75;
   filter: blur(.4px);
 }
+
+/* ---------- 은행잎: 가을 경복궁 · 한지 · 먹 · 은행 노랑 ---------- */
+[data-theme="ginkgo"] {
+  --bg: #e6ddc9;
+  --paper: #f7f1e3;
+  --paper-2: #f1e8d4;
+  --ink: #2e2822;
+  --ink-2: #514840;
+  --muted: #918574;
+  --line: #e5dac4;
+  --line-strong: #d2c3a6;
+  --gold: #c08a12;
+  --gold-soft: #e6b940;
+  --serif-ko: "Gowun Batang", serif;
+  --brush: "Song Myung", "Gowun Batang", serif;
+  --name-font: "Cormorant Garamond", serif;
+  --cover-bg: linear-gradient(180deg, rgba(247, 241, 227, 0) 0%, rgba(240, 222, 170, .55) 78%, rgba(232, 200, 120, .55) 100%);
+  --cover-fg: var(--ink);
+  --cover-sub: var(--muted);
+  --ticket-bg: #2e2822;
+  --ticket-fg: #e9bf4c;
+  --ticket-sub: rgba(233, 191, 76, .7);
+  --ticket-frame: rgba(233, 191, 76, .35);
+  --sun: #9b3c2f;
+  /* 한지 결 */
+  --hanji: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .35 0 0 0 0 .24 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --leaf: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 26C12 26 3 19 2 9C2 6 4 4 7 4C11 4 15 5 18.5 8L20 3L21.5 8C25 5 29 4 33 4C36 4 38 6 38 9C37 19 28 26 20 26Z' fill='%23e3a92b'/%3E%3Cpath d='M20 26C20 32 19 38 17 43' stroke='%23c48a1a' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  --leaf-deep: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 26C12 26 3 19 2 9C2 6 4 4 7 4C11 4 15 5 18.5 8L20 3L21.5 8C25 5 29 4 33 4C36 4 38 6 38 9C37 19 28 26 20 26Z' fill='%23c9861a'/%3E%3Cpath d='M20 26C20 32 19 38 17 43' stroke='%23a06a12' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  --leaf-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 26C12 26 3 19 2 9C2 6 4 4 7 4C11 4 15 5 18.5 8L20 3L21.5 8C25 5 29 4 33 4C36 4 38 6 38 9C37 19 28 26 20 26Z' fill='%23f0cf63'/%3E%3Cpath d='M20 26C20 32 19 38 17 43' stroke='%23d6a62e' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+[data-theme="ginkgo"] .card,
+[data-theme="ginkgo"] #when,
+[data-theme="ginkgo"] .lucky,
+[data-theme="ginkgo"] #accounts { background-image: var(--hanji); }
+[data-theme="ginkgo"] .cover { background-image: var(--cover-bg), var(--hanji); display: flex; flex-direction: column; align-items: center; padding: 48px 32px 60px; }
+
+[data-theme="ginkgo"] .cover-kicker {
+  order: 1; font-family: var(--brush); font-weight: 400; font-size: 16px;
+  letter-spacing: .32em; padding-left: .32em; color: var(--gold); opacity: 1; margin-bottom: 26px;
+}
+[data-theme="ginkgo"] .cover-photo { order: 2; width: 100%; outline: 1px solid var(--ink-2); outline-offset: 7px; margin: 7px; }
+[data-theme="ginkgo"] .cover-photo::after { inset: 0; border: 0; box-shadow: inset 0 0 60px rgba(120, 80, 10, .18); }
+/* 낙관 — 囍 */
+[data-theme="ginkgo"] .cover-photo::before {
+  content: "囍";
+  position: absolute; right: -14px; bottom: -18px; z-index: 2;
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--brush); font-size: 30px; line-height: 1; color: #f7ecd9;
+  background: #9b3c2f; border-radius: 4px; transform: rotate(-5deg);
+  box-shadow: inset 0 0 0 2px #9b3c2f, inset 0 0 0 3.5px rgba(247, 236, 217, .7);
+  opacity: .93;
+}
+[data-theme="ginkgo"] .cover-ko {
+  order: 3; font-family: var(--brush); font-size: 30px; letter-spacing: .14em;
+  margin: 44px 0 4px; color: var(--ink);
+}
+[data-theme="ginkgo"] .cover-names { order: 4; font-size: 17px; font-style: italic; color: var(--muted); margin: 0; letter-spacing: .06em; }
+[data-theme="ginkgo"] .cover-names i { color: var(--gold); margin: 0 6px; }
+[data-theme="ginkgo"] .rule { order: 5; width: 22px; height: 24px; background: var(--leaf) center / contain no-repeat; margin: 22px auto; }
+[data-theme="ginkgo"] .cover-date { order: 6; font-size: 14px; letter-spacing: .32em; color: var(--ink-2); margin-bottom: 6px; }
+[data-theme="ginkgo"] .cover-meta { order: 7; }
+
+[data-theme="ginkgo"] .section + .section::before,
+[data-theme="ginkgo"] .cover + .section::before,
+[data-theme="ginkgo"] .footer::before {
+  width: 20px; height: 22px; top: 24px; transform: translateX(-50%) rotate(-14deg);
+  background: var(--leaf) center / contain no-repeat; opacity: .75;
+}
+[data-theme="ginkgo"] .eyebrow { font-style: italic; letter-spacing: .24em; font-size: 14px; color: var(--gold); }
+[data-theme="ginkgo"] .title { font-family: var(--brush); font-weight: 400; font-size: 22px; letter-spacing: .06em; }
+[data-theme="ginkgo"] #when .title { font-family: var(--serif-en); }
+[data-theme="ginkgo"] .greeting { line-height: 2.25; }
+[data-theme="ginkgo"] .parents b,
+[data-theme="ginkgo"] .venue-name,
+[data-theme="ginkgo"] .accordion summary { font-family: var(--brush); font-weight: 400; }
+[data-theme="ginkgo"] .cal-grid .on { background: var(--gold); color: #fffaf0; }
+[data-theme="ginkgo"] .dday b { color: var(--gold); }
+[data-theme="ginkgo"] .segmented input:checked + span { background: var(--ink); }
+[data-theme="ginkgo"] .field input[type="text"],
+[data-theme="ginkgo"] .field input[type="tel"],
+[data-theme="ginkgo"] .field textarea,
+[data-theme="ginkgo"] .segmented span,
+[data-theme="ginkgo"] .stepper,
+[data-theme="ginkgo"] .accordion details { background: #fffcf4; }
+[data-theme="ginkgo"] .ticket-bottom { background: #fffcf4; }
+[data-theme="ginkgo"] .ticket-top::after {
+  content: ""; position: absolute; right: 18px; top: 16px; width: 26px; height: 28px;
+  background: var(--leaf) center / contain no-repeat; transform: rotate(18deg); opacity: .9;
+}
+[data-theme="ginkgo"] .gallery-grid { gap: 4px; }
+[data-theme="ginkgo"] .map { filter: sepia(.25) saturate(.85); }
+[data-theme="ginkgo"] .footer-sign { font-size: 24px; }
+
+/* 떨어지는 은행잎 */
+[data-theme="ginkgo"] .fall i {
+  width: var(--s); height: calc(var(--s) * 1.1);
+  background: var(--leaf) center / contain no-repeat;
+  opacity: .92;
+}
+[data-theme="ginkgo"] .fall i:nth-child(3n) { background-image: var(--leaf-deep); }
+[data-theme="ginkgo"] .fall i:nth-child(4n) { background-image: var(--leaf-light); }
