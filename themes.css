@@ -1,65 +1,7 @@
 /* ============================================================
    테마 — config.js 의 theme 값으로 선택
-   classic(기본, style.css) · romantic · minimal · winter
+   classic(style.css) · minimal · winter · ginkgo · signature
    ============================================================ */
-
-/* ---------- 로맨틱 플라워: 연핑크 · 라벤더 · 아치 사진 · 꽃잎 ---------- */
-[data-theme="romantic"] {
-  --bg: #f1e4e8;
-  --paper: #fffafb;
-  --paper-2: #f9f1f6;
-  --ink: #5b4452;
-  --ink-2: #77606e;
-  --muted: #a8949f;
-  --line: #f1e1e7;
-  --line-strong: #e6cdd7;
-  --gold: #c7869a;
-  --gold-soft: #e9bccb;
-  --serif-ko: "Gowun Batang", serif;
-  --name-font: "Great Vibes", cursive;
-  --radius: 14px;
-  --cover-bg: linear-gradient(180deg, #fbe8ee 0%, #f6eef8 55%, #fffafb 100%);
-  --cover-sub: #a8949f;
-  --ticket-bg: #c7869a;
-  --ticket-fg: #fff;
-  --ticket-sub: rgba(255, 255, 255, .85);
-  --ticket-frame: rgba(255, 255, 255, .55);
-  --sun: #d0708a;
-}
-[data-theme="romantic"] .cover-photo { border-radius: 999px 999px 0 0; overflow: hidden; }
-[data-theme="romantic"] .cover-photo::after { border-radius: 999px 999px 0 0; border-color: rgba(255, 255, 255, .7); }
-[data-theme="romantic"] .cover-names { font-size: 52px; margin-top: 26px; }
-[data-theme="romantic"] .cover-names i { font-family: "Great Vibes", cursive; font-style: normal; }
-[data-theme="romantic"] .cover-date { letter-spacing: .18em; }
-[data-theme="romantic"] .eyebrow { font-style: italic; letter-spacing: .2em; }
-[data-theme="romantic"] .rule { width: auto; height: auto; background: none; color: var(--gold); }
-[data-theme="romantic"] .rule::before { content: "❀"; font-size: 16px; }
-[data-theme="romantic"] .section + .section::before,
-[data-theme="romantic"] .cover + .section::before,
-[data-theme="romantic"] .footer::before {
-  content: "✿"; width: auto; height: auto; background: none; color: var(--gold-soft);
-  transform: translate(-50%, 20px); font-size: 14px;
-}
-[data-theme="romantic"] .btn,
-[data-theme="romantic"] .segmented { border-radius: 999px; }
-[data-theme="romantic"] .btn { background: var(--gold); border-color: var(--gold); color: #fff; }
-[data-theme="romantic"] .btn.ghost { background: transparent; color: var(--gold); }
-[data-theme="romantic"] .btn.kakao { background: #fee500; border-color: #fee500; color: #191919; }
-[data-theme="romantic"] .segmented input:checked + span { background: var(--gold); }
-[data-theme="romantic"] .cal-grid .on { background: var(--gold); }
-[data-theme="romantic"] .gallery-grid { gap: 6px; }
-[data-theme="romantic"] .gallery-grid button { border-radius: 10px; }
-[data-theme="romantic"] .gb-list { border-top-color: var(--line-strong); }
-[data-theme="romantic"] .ticket-top { border: 0; background: var(--ticket-bg); }
-[data-theme="romantic"] .ticket-top,
-[data-theme="romantic"] .ticket-bottom { border-radius: 18px 18px 0 0; }
-[data-theme="romantic"] .ticket-bottom { border-radius: 0 0 18px 18px; }
-[data-theme="romantic"] .fall i {
-  width: 11px; height: 14px;
-  background: radial-gradient(circle at 30% 30%, #ffe3ea, #f2a9bd);
-  border-radius: 150% 0 150% 0;
-  opacity: .85;
-}
 
 /* ---------- 모던 미니멀: 화이트 · 차콜 · 세이지 포인트 ---------- */
 [data-theme="minimal"] {
@@ -283,3 +225,118 @@
 }
 [data-theme="ginkgo"] .fall i:nth-child(3n) { background-image: var(--leaf-deep); }
 [data-theme="ginkgo"] .fall i:nth-child(4n) { background-image: var(--leaf-light); }
+
+/* ---------- 시그니처: 풀스크린 사진 · 필기체 캘리그라피 · 화이트 · 차콜 ---------- */
+[data-theme="signature"] {
+  --bg: #e9e7e3;
+  --paper: #ffffff;
+  --paper-2: #f7f6f3;
+  --ink: #222120;
+  --ink-2: #4a4846;
+  --muted: #9a9692;
+  --line: #eeece8;
+  --line-strong: #dcd8d2;
+  --gold: #a08c74;
+  --gold-soft: #cdbfae;
+  --serif-en: "Jost", sans-serif;
+  --serif-ko: "Noto Sans KR", sans-serif;
+  --script: "Mrs Saint Delafield", cursive;
+  --name-font: var(--script);
+  --radius: 4px;
+  --cover-fg: #fff;
+  --cover-sub: rgba(255, 255, 255, .8);
+  --ticket-bg: #222120;
+  --ticket-fg: #fff;
+  --ticket-sub: rgba(255, 255, 255, .65);
+  --ticket-frame: transparent;
+  --sun: #b07a6a;
+}
+
+/* 커버: 사진이 화면 가득, 그 위에 필기체 */
+[data-theme="signature"] .cover {
+  height: 100vh;
+  height: 100svh;
+  min-height: 600px;
+  max-height: 920px;
+  padding: 0 24px 76px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  background: #2a2826;
+}
+[data-theme="signature"] .cover > .cover-photo { position: absolute; inset: 0; z-index: 0; margin: 0; aspect-ratio: auto; }
+[data-theme="signature"] .cover-photo img { animation: sig-zoom 14s ease-out both; }
+[data-theme="signature"] .cover-photo::after {
+  inset: 0; border: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,0) 22%, rgba(0,0,0,0) 42%, rgba(0,0,0,.5) 78%, rgba(0,0,0,.62) 100%);
+}
+[data-theme="signature"] .cover-kicker {
+  position: absolute; top: 40px; left: 0; right: 0;
+  font-family: var(--serif-en); font-weight: 400; font-size: 11px;
+  letter-spacing: .5em; padding-left: .5em; opacity: .9; margin: 0;
+}
+[data-theme="signature"] .cover-script {
+  display: block;
+  font-family: var(--script);
+  font-size: 74px;
+  line-height: 1;
+  margin: 0 0 18px;
+  transform: rotate(-6deg);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .25);
+  animation: sig-in 1.8s .3s ease both;
+}
+[data-theme="signature"] .cover-names {
+  font-family: var(--serif-en); font-size: 14px; font-weight: 400;
+  text-transform: uppercase; letter-spacing: .38em; padding-left: .38em;
+  margin: 10px 0 0; animation: sig-up 1.2s 1s ease both;
+}
+[data-theme="signature"] .cover-names i { font-style: normal; color: inherit; margin: 0 8px; font-size: 1em; }
+[data-theme="signature"] .rule { width: 1px; height: 22px; background: rgba(255, 255, 255, .6); margin: 16px auto; animation: sig-up 1.2s 1.15s ease both; }
+[data-theme="signature"] .cover-date { font-family: var(--serif-en); font-size: 13px; font-weight: 300; letter-spacing: .3em; padding-left: .3em; margin-top: 8px; animation: sig-up 1.2s 1.3s ease both; }
+[data-theme="signature"] .cover-ko,
+[data-theme="signature"] #dateText { display: none; }
+[data-theme="signature"] #venueText { font-size: 12px; letter-spacing: .06em; margin-top: 6px; animation: sig-up 1.2s 1.45s ease both; }
+/* 스크롤 안내 */
+[data-theme="signature"] .cover::after {
+  content: ""; position: absolute; left: 50%; bottom: 18px; z-index: 1;
+  width: 1px; height: 34px; background: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,.85));
+  animation: sig-scroll 2.2s ease-in-out infinite;
+}
+@keyframes sig-in { from { opacity: 0; transform: rotate(-6deg) translateY(10px); filter: blur(4px); } to { opacity: 1; transform: rotate(-6deg); filter: none; } }
+@keyframes sig-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes sig-zoom { from { transform: scale(1.08); } to { transform: scale(1); } }
+@keyframes sig-scroll { 0%, 100% { opacity: .2; transform: scaleY(.6); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } }
+
+/* 본문 */
+[data-theme="signature"] .section + .section::before,
+[data-theme="signature"] .cover + .section::before,
+[data-theme="signature"] .footer::before { display: none; }
+[data-theme="signature"] .section { padding: 80px 28px; }
+[data-theme="signature"] .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: .4em; padding-left: .4em; margin-bottom: 10px; }
+[data-theme="signature"] .title { font-weight: 500; font-size: 20px; letter-spacing: -.01em; }
+[data-theme="signature"] .greeting { font-family: var(--serif-ko); font-size: 14.5px; line-height: 2.1; }
+[data-theme="signature"] .parents b { font-family: var(--serif-ko); }
+[data-theme="signature"] #when .title { font-weight: 300; font-size: 34px; letter-spacing: .02em; }
+[data-theme="signature"] .calendar { border-color: var(--line); }
+[data-theme="signature"] .cal-grid span { font-size: 15px; }
+[data-theme="signature"] .cal-grid .on { background: var(--ink); }
+[data-theme="signature"] .countdown b { font-weight: 300; }
+[data-theme="signature"] .gallery-grid { gap: 2px; }
+[data-theme="signature"] .ticket { filter: drop-shadow(0 14px 28px rgba(0, 0, 0, .16)); }
+[data-theme="signature"] .ticket-top { border: 0; background: var(--ticket-bg); }
+[data-theme="signature"] .ticket-top::before { display: none; }
+[data-theme="signature"] .ticket-label { font-family: var(--script); font-size: 34px; letter-spacing: 0; padding-left: 0; text-transform: none; line-height: 1; }
+[data-theme="signature"] .ticket-no { font-weight: 300; letter-spacing: .06em; }
+[data-theme="signature"] .gb-list { border-top-color: var(--line-strong); }
+[data-theme="signature"] .footer-sign { font-style: normal; font-size: 46px; line-height: 1.2; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="signature"] .cover-photo img,
+  [data-theme="signature"] .cover-script,
+  [data-theme="signature"] .cover-names,
+  [data-theme="signature"] .rule,
+  [data-theme="signature"] .cover-date,
+  [data-theme="signature"] #venueText,
+  [data-theme="signature"] .cover::after { animation: none; }
+}

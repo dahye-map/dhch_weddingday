@@ -67,7 +67,8 @@ input, textarea, button { font-variant-numeric: lining-nums; }
   color: var(--cover-fg);
 }
 .cover > * { position: relative; z-index: 1; }
-.cover-big { display: none; }
+.cover-big,
+.cover-script { display: none; }
 .cover-kicker {
   font-family: var(--serif-en);
   font-size: 13px;
@@ -347,7 +348,7 @@ input, textarea, button { font-variant-numeric: lining-nums; }
   border: 1px solid var(--ticket-frame);
   border-bottom: 0;
 }
-.ticket-label { margin: 0; font-family: var(--serif-en); font-size: 12px; letter-spacing: 0.45em; padding-left: .45em; }
+.ticket-label { margin: 0; font-family: var(--serif-en); text-transform: uppercase; font-size: 12px; letter-spacing: 0.45em; padding-left: .45em; }
 .ticket-no {
   margin: 6px 0 0;
   font-family: var(--serif-en);
@@ -489,7 +490,7 @@ input, textarea, button { font-variant-numeric: lining-nums; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
 
-/* ---------- 꽃잎 / 눈 내리는 효과 (로맨틱 · 윈터 테마) ---------- */
+/* ---------- 눈 / 은행잎 떨어지는 효과 (윈터 · 은행잎 테마) ---------- */
 .fall { position: absolute; inset: 0; z-index: 2 !important; pointer-events: none; overflow: hidden; }
 .fall i {
   position: absolute;
