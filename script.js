@@ -40,11 +40,6 @@
       fonts: "family=Mrs+Saint+Delafield&family=Jost:wght@300;400;500",
       kicker: "SAVE THE DATE",
     },
-    sky: {
-      label: "스카이",
-      fonts: "family=Instrument+Serif:ital@0;1&family=Special+Elite&family=Gowun+Batang:wght@400;700",
-      kicker: "PAR AVION · WEDDING MAIL",
-    },
     spring: {
       label: "봄",
       fonts: "family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400",
