@@ -40,6 +40,12 @@
       fonts: "family=Mrs+Saint+Delafield&family=Jost:wght@300;400;500",
       kicker: "SAVE THE DATE",
     },
+    spring: {
+      label: "봄",
+      fonts: "family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,600&family=Gowun+Dodum",
+      fall: "blossom",
+      kicker: "Our Spring Wedding",
+    },
     ginkgo: {
       label: "은행잎",
       fonts: "family=Song+Myung&family=Gowun+Batang:wght@400;700",
@@ -59,16 +65,17 @@
     const box = document.createElement("div");
     box.className = "fall";
     box.setAttribute("aria-hidden", "true");
-    const n = { snow: 34, ginkgo: 14 }[kind];
+    const n = { snow: 34, ginkgo: 9, blossom: 12 }[kind];
     for (let i = 0; i < n; i++) {
       const p = document.createElement("i");
       // 은행잎은 천천히, 고즈넉하게
-      const dur = { snow: 9, ginkgo: 15 }[kind] + Math.random() * 10;
+      const dur = { snow: 9, ginkgo: 20, blossom: 11 }[kind] + Math.random() * 10;
       p.style.left = `${Math.random() * 100}%`;
       p.style.animationDuration = `${dur}s`;
       p.style.animationDelay = `${-Math.random() * dur}s`;
       p.style.setProperty("--sway", `${(Math.random() - 0.5) * 80}px`);
-      p.style.setProperty("--s", kind === "ginkgo" ? `${13 + Math.random() * 10}px` : `${2 + Math.random() * 4}px`);
+      const [min, range] = { snow: [2, 4], ginkgo: [11, 6], blossom: [10, 9] }[kind];
+      p.style.setProperty("--s", `${min + Math.random() * range}px`);
       box.appendChild(p);
     }
     cover.prepend(box);
