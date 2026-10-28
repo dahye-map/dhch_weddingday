@@ -1,0 +1,285 @@
+/* ============================================================
+   테마 — config.js 의 theme 값으로 선택
+   classic(기본, style.css) · romantic · minimal · winter
+   ============================================================ */
+
+/* ---------- 로맨틱 플라워: 연핑크 · 라벤더 · 아치 사진 · 꽃잎 ---------- */
+[data-theme="romantic"] {
+  --bg: #f1e4e8;
+  --paper: #fffafb;
+  --paper-2: #f9f1f6;
+  --ink: #5b4452;
+  --ink-2: #77606e;
+  --muted: #a8949f;
+  --line: #f1e1e7;
+  --line-strong: #e6cdd7;
+  --gold: #c7869a;
+  --gold-soft: #e9bccb;
+  --serif-ko: "Gowun Batang", serif;
+  --name-font: "Great Vibes", cursive;
+  --radius: 14px;
+  --cover-bg: linear-gradient(180deg, #fbe8ee 0%, #f6eef8 55%, #fffafb 100%);
+  --cover-sub: #a8949f;
+  --ticket-bg: #c7869a;
+  --ticket-fg: #fff;
+  --ticket-sub: rgba(255, 255, 255, .85);
+  --ticket-frame: rgba(255, 255, 255, .55);
+  --sun: #d0708a;
+}
+[data-theme="romantic"] .cover-photo { border-radius: 999px 999px 0 0; overflow: hidden; }
+[data-theme="romantic"] .cover-photo::after { border-radius: 999px 999px 0 0; border-color: rgba(255, 255, 255, .7); }
+[data-theme="romantic"] .cover-names { font-size: 52px; margin-top: 26px; }
+[data-theme="romantic"] .cover-names i { font-family: "Great Vibes", cursive; font-style: normal; }
+[data-theme="romantic"] .cover-date { letter-spacing: .18em; }
+[data-theme="romantic"] .eyebrow { font-style: italic; letter-spacing: .2em; }
+[data-theme="romantic"] .rule { width: auto; height: auto; background: none; color: var(--gold); }
+[data-theme="romantic"] .rule::before { content: "❀"; font-size: 16px; }
+[data-theme="romantic"] .section + .section::before,
+[data-theme="romantic"] .cover + .section::before,
+[data-theme="romantic"] .footer::before {
+  content: "✿"; width: auto; height: auto; background: none; color: var(--gold-soft);
+  transform: translate(-50%, 20px); font-size: 14px;
+}
+[data-theme="romantic"] .btn,
+[data-theme="romantic"] .segmented { border-radius: 999px; }
+[data-theme="romantic"] .btn { background: var(--gold); border-color: var(--gold); color: #fff; }
+[data-theme="romantic"] .btn.ghost { background: transparent; color: var(--gold); }
+[data-theme="romantic"] .btn.kakao { background: #fee500; border-color: #fee500; color: #191919; }
+[data-theme="romantic"] .segmented input:checked + span { background: var(--gold); }
+[data-theme="romantic"] .cal-grid .on { background: var(--gold); }
+[data-theme="romantic"] .gallery-grid { gap: 6px; }
+[data-theme="romantic"] .gallery-grid button { border-radius: 10px; }
+[data-theme="romantic"] .gb-list { border-top-color: var(--line-strong); }
+[data-theme="romantic"] .ticket-top { border: 0; background: var(--ticket-bg); }
+[data-theme="romantic"] .ticket-top,
+[data-theme="romantic"] .ticket-bottom { border-radius: 18px 18px 0 0; }
+[data-theme="romantic"] .ticket-bottom { border-radius: 0 0 18px 18px; }
+[data-theme="romantic"] .fall i {
+  width: 11px; height: 14px;
+  background: radial-gradient(circle at 30% 30%, #ffe3ea, #f2a9bd);
+  border-radius: 150% 0 150% 0;
+  opacity: .85;
+}
+
+/* ---------- 모던 미니멀: 화이트 · 차콜 · 세이지 포인트 ---------- */
+[data-theme="minimal"] {
+  --bg: #e8e8e6;
+  --paper: #ffffff;
+  --paper-2: #f5f5f3;
+  --ink: #161616;
+  --ink-2: #3f3f3f;
+  --muted: #8b8b8b;
+  --line: #ececec;
+  --line-strong: #d5d5d5;
+  --gold: #6f7f5f;
+  --gold-soft: #a7b496;
+  --serif-en: "Montserrat", sans-serif;
+  --serif-ko: "Noto Sans KR", sans-serif;
+  --name-font: "Montserrat", sans-serif;
+  --radius: 0;
+  --ticket-bg: #161616;
+  --ticket-fg: #fff;
+  --ticket-sub: rgba(255, 255, 255, .7);
+  --ticket-frame: transparent;
+  --sun: #6f7f5f;
+}
+[data-theme="minimal"] .cover { display: flex; flex-direction: column; text-align: left; padding: 56px 28px 48px; }
+[data-theme="minimal"] .cover-kicker { order: 1; letter-spacing: .3em; font-size: 11px; padding-left: 0; font-weight: 600; margin-bottom: 8px; }
+[data-theme="minimal"] .cover-big {
+  display: block; order: 2;
+  font-family: "Montserrat", sans-serif; font-weight: 300;
+  font-size: 92px; line-height: .95; letter-spacing: -.04em; margin: 0 0 32px;
+}
+[data-theme="minimal"] .cover-big small { display: block; font-size: 15px; letter-spacing: .3em; font-weight: 500; margin-top: 14px; color: var(--gold); }
+[data-theme="minimal"] .cover-photo { order: 3; aspect-ratio: 4 / 5; }
+[data-theme="minimal"] .cover-photo::after { display: none; }
+[data-theme="minimal"] .cover-names {
+  order: 4; font-size: 22px; font-weight: 500; text-transform: uppercase; letter-spacing: .16em;
+  margin: 28px 0 0; display: flex; flex-direction: column;
+}
+[data-theme="minimal"] .cover-names i { font-style: normal; color: var(--gold); margin: 2px 0; font-size: 14px; }
+[data-theme="minimal"] .cover-date { display: none; }
+[data-theme="minimal"] .rule { order: 5; margin: 22px 0; width: 24px; background: var(--ink); }
+[data-theme="minimal"] .cover-ko { order: 6; letter-spacing: 0; font-weight: 500; }
+[data-theme="minimal"] .cover-meta { order: 7; }
+[data-theme="minimal"] .section + .section::before,
+[data-theme="minimal"] .cover + .section::before,
+[data-theme="minimal"] .footer::before { left: 28px; right: 28px; width: auto; height: 1px; background: var(--line); }
+[data-theme="minimal"] .section { text-align: left; padding: 64px 28px; }
+[data-theme="minimal"] .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .3em; padding-left: 0; }
+[data-theme="minimal"] .title { font-size: 22px; font-weight: 500; letter-spacing: -.01em; }
+[data-theme="minimal"] .greeting { font-size: 14px; line-height: 2; }
+[data-theme="minimal"] .parents { display: flex; padding: 20px 0; }
+[data-theme="minimal"] #when .title { font-size: 34px; font-weight: 300; letter-spacing: -.02em; }
+[data-theme="minimal"] .calendar,
+[data-theme="minimal"] .countdown { margin-left: 0; margin-right: 0; }
+[data-theme="minimal"] .countdown { justify-content: space-between; }
+[data-theme="minimal"] .countdown b { font-weight: 300; font-size: 32px; }
+[data-theme="minimal"] .countdown div { text-align: left; }
+[data-theme="minimal"] .cal-buttons { justify-content: flex-start; }
+[data-theme="minimal"] .cal-grid span { font-size: 14px; }
+[data-theme="minimal"] .cal-grid .on { background: var(--gold); border-radius: 0; }
+[data-theme="minimal"] .venue-addr { justify-content: flex-start; }
+[data-theme="minimal"] .chip { border-radius: 0; }
+[data-theme="minimal"] .gallery-grid { gap: 2px; }
+[data-theme="minimal"] .gallery-grid button:first-child { grid-column: span 3; grid-row: span 1; aspect-ratio: 3 / 2; }
+[data-theme="minimal"] .ticket { filter: none; }
+[data-theme="minimal"] .ticket-top { text-align: left; padding: 24px; border: 0; background: var(--ticket-bg); }
+[data-theme="minimal"] .ticket-top::before { display: none; }
+[data-theme="minimal"] .ticket-no { font-weight: 300; font-size: 60px; letter-spacing: -.02em; }
+[data-theme="minimal"] .ticket-bottom { text-align: left; border: 1px solid var(--ink); border-top: 0; }
+[data-theme="minimal"] .ticket-bottom::after { display: none; }
+[data-theme="minimal"] .ticket-top, [data-theme="minimal"] .ticket-bottom { border-radius: 0; }
+[data-theme="minimal"] .result { text-align: left; }
+[data-theme="minimal"] .footer { text-align: left; }
+[data-theme="minimal"] .footer-sign { font-style: normal; text-transform: uppercase; letter-spacing: .16em; font-size: 16px; font-weight: 500; }
+
+/* ---------- 윈터 감성: 딥그린 · 버건디 · 크림 · 눈 ---------- */
+[data-theme="winter"] {
+  --bg: #16291f;
+  --paper: #fbf7ef;
+  --paper-2: #f3ecdf;
+  --ink: #1e3a2e;
+  --ink-2: #3d5248;
+  --muted: #86907f;
+  --line: #e8dfcd;
+  --line-strong: #d6c9b0;
+  --gold: #8e2f3b;
+  --gold-soft: #c9a56a;
+  --serif-en: "Playfair Display", serif;
+  --name-font: "Playfair Display", serif;
+  --cover-bg: radial-gradient(120% 70% at 50% 0%, #2c5243 0%, #1e3a2e 60%, #172e24 100%);
+  --cover-fg: #f6efe1;
+  --cover-sub: rgba(246, 239, 225, .65);
+  --ticket-bg: #8e2f3b;
+  --ticket-fg: #f6e7c8;
+  --ticket-sub: rgba(246, 231, 200, .8);
+  --ticket-frame: rgba(201, 165, 106, .6);
+  --sun: #8e2f3b;
+}
+[data-theme="winter"] .cover { padding-bottom: 64px; }
+[data-theme="winter"] .cover-photo { outline: 1px solid rgba(201, 165, 106, .7); outline-offset: 8px; margin: 8px; }
+[data-theme="winter"] .cover-photo::after { display: none; }
+[data-theme="winter"] .cover-names { font-style: italic; font-size: 40px; }
+[data-theme="winter"] .cover-names i { color: var(--gold-soft); }
+[data-theme="winter"] .cover-date { font-size: 15px; letter-spacing: .32em; }
+[data-theme="winter"] .rule { background: var(--gold-soft); }
+[data-theme="winter"] .eyebrow { font-style: italic; letter-spacing: .22em; font-size: 15px; }
+[data-theme="winter"] #when .title { font-weight: 400; }
+[data-theme="winter"] .cal-grid .on { background: var(--gold); }
+[data-theme="winter"] .btn { background: var(--ink); border-color: var(--ink); }
+[data-theme="winter"] .btn.ghost { background: transparent; color: var(--ink); }
+[data-theme="winter"] .btn.kakao { background: #fee500; border-color: #fee500; color: #191919; }
+[data-theme="winter"] .segmented input:checked + span { background: var(--ink); }
+[data-theme="winter"] .footer { background: var(--ink); color: rgba(246, 239, 225, .65); }
+[data-theme="winter"] .footer::before { background: var(--gold-soft); }
+[data-theme="winter"] .footer-sign { color: #f6efe1; }
+[data-theme="winter"] .footer .btn.ghost { color: #f6efe1; border-color: rgba(246, 239, 225, .5); }
+[data-theme="winter"] .fall i {
+  width: var(--s); height: var(--s);
+  background: #fff;
+  border-radius: 50%;
+  opacity: .75;
+  filter: blur(.4px);
+}
+
+/* ---------- 은행잎: 가을 경복궁 · 한지 · 먹 · 은행 노랑 ---------- */
+[data-theme="ginkgo"] {
+  --bg: #e6ddc9;
+  --paper: #f7f1e3;
+  --paper-2: #f1e8d4;
+  --ink: #2e2822;
+  --ink-2: #514840;
+  --muted: #918574;
+  --line: #e5dac4;
+  --line-strong: #d2c3a6;
+  --gold: #c08a12;
+  --gold-soft: #e6b940;
+  --serif-ko: "Gowun Batang", serif;
+  --brush: "Song Myung", "Gowun Batang", serif;
+  --name-font: "Cormorant Garamond", serif;
+  --cover-bg: linear-gradient(180deg, rgba(247, 241, 227, 0) 0%, rgba(240, 222, 170, .55) 78%, rgba(232, 200, 120, .55) 100%);
+  --cover-fg: var(--ink);
+  --cover-sub: var(--muted);
+  --ticket-bg: #2e2822;
+  --ticket-fg: #e9bf4c;
+  --ticket-sub: rgba(233, 191, 76, .7);
+  --ticket-frame: rgba(233, 191, 76, .35);
+  --sun: #9b3c2f;
+  /* 한지 결 */
+  --hanji: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .35 0 0 0 0 .24 0 0 0 .1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --leaf: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 26C12 26 3 19 2 9C2 6 4 4 7 4C11 4 15 5 18.5 8L20 3L21.5 8C25 5 29 4 33 4C36 4 38 6 38 9C37 19 28 26 20 26Z' fill='%23e3a92b'/%3E%3Cpath d='M20 26C20 32 19 38 17 43' stroke='%23c48a1a' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  --leaf-deep: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 26C12 26 3 19 2 9C2 6 4 4 7 4C11 4 15 5 18.5 8L20 3L21.5 8C25 5 29 4 33 4C36 4 38 6 38 9C37 19 28 26 20 26Z' fill='%23c9861a'/%3E%3Cpath d='M20 26C20 32 19 38 17 43' stroke='%23a06a12' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  --leaf-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 44'%3E%3Cpath d='M20 26C12 26 3 19 2 9C2 6 4 4 7 4C11 4 15 5 18.5 8L20 3L21.5 8C25 5 29 4 33 4C36 4 38 6 38 9C37 19 28 26 20 26Z' fill='%23f0cf63'/%3E%3Cpath d='M20 26C20 32 19 38 17 43' stroke='%23d6a62e' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+[data-theme="ginkgo"] .card,
+[data-theme="ginkgo"] #when,
+[data-theme="ginkgo"] .lucky,
+[data-theme="ginkgo"] #accounts { background-image: var(--hanji); }
+[data-theme="ginkgo"] .cover { background-image: var(--cover-bg), var(--hanji); display: flex; flex-direction: column; align-items: center; padding: 48px 32px 60px; }
+
+[data-theme="ginkgo"] .cover-kicker {
+  order: 1; font-family: var(--brush); font-weight: 400; font-size: 16px;
+  letter-spacing: .32em; padding-left: .32em; color: var(--gold); opacity: 1; margin-bottom: 26px;
+}
+[data-theme="ginkgo"] .cover-photo { order: 2; width: 100%; outline: 1px solid var(--ink-2); outline-offset: 7px; margin: 7px; }
+[data-theme="ginkgo"] .cover-photo::after { inset: 0; border: 0; box-shadow: inset 0 0 60px rgba(120, 80, 10, .18); }
+/* 낙관 — 囍 */
+[data-theme="ginkgo"] .cover-photo::before {
+  content: "囍";
+  position: absolute; right: -14px; bottom: -18px; z-index: 2;
+  width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+  font-family: var(--brush); font-size: 30px; line-height: 1; color: #f7ecd9;
+  background: #9b3c2f; border-radius: 4px; transform: rotate(-5deg);
+  box-shadow: inset 0 0 0 2px #9b3c2f, inset 0 0 0 3.5px rgba(247, 236, 217, .7);
+  opacity: .93;
+}
+[data-theme="ginkgo"] .cover-ko {
+  order: 3; font-family: var(--brush); font-size: 30px; letter-spacing: .14em;
+  margin: 44px 0 4px; color: var(--ink);
+}
+[data-theme="ginkgo"] .cover-names { order: 4; font-size: 17px; font-style: italic; color: var(--muted); margin: 0; letter-spacing: .06em; }
+[data-theme="ginkgo"] .cover-names i { color: var(--gold); margin: 0 6px; }
+[data-theme="ginkgo"] .rule { order: 5; width: 22px; height: 24px; background: var(--leaf) center / contain no-repeat; margin: 22px auto; }
+[data-theme="ginkgo"] .cover-date { order: 6; font-size: 14px; letter-spacing: .32em; color: var(--ink-2); margin-bottom: 6px; }
+[data-theme="ginkgo"] .cover-meta { order: 7; }
+
+[data-theme="ginkgo"] .section + .section::before,
+[data-theme="ginkgo"] .cover + .section::before,
+[data-theme="ginkgo"] .footer::before {
+  width: 20px; height: 22px; top: 24px; transform: translateX(-50%) rotate(-14deg);
+  background: var(--leaf) center / contain no-repeat; opacity: .75;
+}
+[data-theme="ginkgo"] .eyebrow { font-style: italic; letter-spacing: .24em; font-size: 14px; color: var(--gold); }
+[data-theme="ginkgo"] .title { font-family: var(--brush); font-weight: 400; font-size: 22px; letter-spacing: .06em; }
+[data-theme="ginkgo"] #when .title { font-family: var(--serif-en); }
+[data-theme="ginkgo"] .greeting { line-height: 2.25; }
+[data-theme="ginkgo"] .parents b,
+[data-theme="ginkgo"] .venue-name,
+[data-theme="ginkgo"] .accordion summary { font-family: var(--brush); font-weight: 400; }
+[data-theme="ginkgo"] .cal-grid .on { background: var(--gold); color: #fffaf0; }
+[data-theme="ginkgo"] .dday b { color: var(--gold); }
+[data-theme="ginkgo"] .segmented input:checked + span { background: var(--ink); }
+[data-theme="ginkgo"] .field input[type="text"],
+[data-theme="ginkgo"] .field input[type="tel"],
+[data-theme="ginkgo"] .field textarea,
+[data-theme="ginkgo"] .segmented span,
+[data-theme="ginkgo"] .stepper,
+[data-theme="ginkgo"] .accordion details { background: #fffcf4; }
+[data-theme="ginkgo"] .ticket-bottom { background: #fffcf4; }
+[data-theme="ginkgo"] .ticket-top::after {
+  content: ""; position: absolute; right: 18px; top: 16px; width: 26px; height: 28px;
+  background: var(--leaf) center / contain no-repeat; transform: rotate(18deg); opacity: .9;
+}
+[data-theme="ginkgo"] .gallery-grid { gap: 4px; }
+[data-theme="ginkgo"] .map { filter: sepia(.25) saturate(.85); }
+[data-theme="ginkgo"] .footer-sign { font-size: 24px; }
+
+/* 떨어지는 은행잎 */
+[data-theme="ginkgo"] .fall i {
+  width: var(--s); height: calc(var(--s) * 1.1);
+  background: var(--leaf) center / contain no-repeat;
+  opacity: .92;
+}
+[data-theme="ginkgo"] .fall i:nth-child(3n) { background-image: var(--leaf-deep); }
+[data-theme="ginkgo"] .fall i:nth-child(4n) { background-image: var(--leaf-light); }
