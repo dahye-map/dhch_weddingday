@@ -1,6 +1,6 @@
 /* ============================================================
    테마 — config.js 의 theme 값으로 선택
-   classic(style.css) · minimal · winter · ginkgo · signature · spring
+   classic(style.css) · minimal · winter · ginkgo · signature · spring · sky
    ============================================================ */
 
 /* ---------- 모던 미니멀: 화이트 · 차콜 · 세이지 포인트 ---------- */
@@ -470,3 +470,89 @@
   66% { transform: translate3d(calc(var(--sway) * -.5), calc(var(--fall-h) * .66), 0) rotate(150deg); }
   100% { transform: translate3d(var(--sway), var(--fall-h), 0) rotate(220deg); }
 }
+
+/* ---------- 스카이 브라운: 하늘색 · 코코아 브라운 · 크림 · 빈티지 엽서 ---------- */
+[data-theme="sky"] {
+  --bg: #d6e4ee;
+  --paper: #f8f4ec;
+  --paper-2: #e6eff6;
+  --ink: #3d2b1f;
+  --ink-2: #5e4636;
+  --muted: #8f7f72;
+  --line: #e7ddd0;
+  --line-strong: #cdbfae;
+  --gold: #8a5a3b;
+  --gold-soft: #c9a88a;
+  --sky: #8fb8dc;
+  --sky-pale: #dcebf6;
+  --serif-en: "Instrument Serif", Georgia, serif;
+  --name-font: "Instrument Serif", Georgia, serif;
+  --radius: 6px;
+  --cover-bg: linear-gradient(180deg, #bcd6ec 0%, #d4e5f2 40%, #f8f4ec 88%);
+  --ticket-bg: #8fb8dc;
+  --ticket-fg: #3d2b1f;
+  --ticket-sub: rgba(61, 43, 31, .7);
+  --ticket-frame: rgba(61, 43, 31, .25);
+  --sun: #8a5a3b;
+  --postmark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 84'%3E%3Cg fill='none' stroke='%236b4a35' stroke-width='1.4'%3E%3Ccircle cx='42' cy='42' r='34'/%3E%3Ccircle cx='42' cy='42' r='25' stroke-width='.9'/%3E%3Cpath d='M78 26c6-4 10 4 16 0s10 4 16 0 6 2 8 0M80 36c6-4 10 4 16 0s10 4 16 0 6 2 8 0M80 46c6-4 10 4 16 0s10 4 16 0 6 2 8 0M78 56c6-4 10 4 16 0s10 4 16 0 6 2 8 0' stroke-width='1.1'/%3E%3C/g%3E%3Cdefs%3E%3Cpath id='t' d='M14 42a28 28 0 1 1 56 0'/%3E%3Cpath id='b' d='M12 42a30 30 0 0 0 60 0'/%3E%3C/defs%3E%3Cg fill='%236b4a35' font-family='Georgia,serif' font-size='8.5' letter-spacing='1.6'%3E%3Ctext%3E%3CtextPath href='%23t' startOffset='50%25' text-anchor='middle'%3EWEDDING DAY%3C/textPath%3E%3C/text%3E%3Ctext%3E%3CtextPath href='%23b' startOffset='50%25' text-anchor='middle'%3EWITH LOVE%3C/textPath%3E%3C/text%3E%3Ctext x='42' y='47' text-anchor='middle' font-size='15' letter-spacing='0' font-style='italic'%3E%26amp;%3C/text%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* 커버: 하늘 위의 엽서 */
+[data-theme="sky"] .cover { padding: 48px 34px 60px; }
+[data-theme="sky"] .cover-kicker { color: var(--ink); opacity: .75; font-family: "Noto Sans KR", sans-serif; font-size: 11px; font-weight: 500; letter-spacing: .45em; }
+[data-theme="sky"] .cover-photo {
+  padding: 10px; background: #fffdf8;
+  box-shadow: 0 14px 34px rgba(61, 43, 31, .16), 0 2px 6px rgba(61, 43, 31, .08);
+}
+[data-theme="sky"] .cover-photo::after { inset: 10px; border: 0; box-shadow: inset 0 0 0 1px rgba(61, 43, 31, .06); }
+/* 소인 */
+[data-theme="sky"] .cover-photo::before {
+  content: ""; position: absolute; z-index: 2; right: -34px; top: -34px;
+  width: 146px; height: 102px; background: var(--postmark) center / contain no-repeat;
+  transform: rotate(-10deg); opacity: .82;
+}
+[data-theme="sky"] .cover-names { font-size: 50px; margin-top: 36px; letter-spacing: 0; }
+[data-theme="sky"] .cover-names i { color: var(--sky); font-size: 1em; margin: 0 10px; }
+[data-theme="sky"] .cover-date { font-family: "Noto Sans KR", sans-serif; font-weight: 400; font-size: 12px; letter-spacing: .38em; color: var(--ink-2); }
+[data-theme="sky"] .rule {
+  width: 44px; height: 5px; margin: 22px auto;
+  background: linear-gradient(var(--sky), var(--sky)) top / 100% 2px no-repeat,
+    linear-gradient(var(--gold), var(--gold)) bottom / 100% 1px no-repeat;
+}
+
+/* 섹션 */
+[data-theme="sky"] .section + .section::before,
+[data-theme="sky"] .cover + .section::before { background: var(--sky); width: 2px; height: 30px; }
+[data-theme="sky"] .eyebrow { font-family: "Noto Sans KR", sans-serif; font-size: 11px; font-weight: 500; letter-spacing: .4em; color: var(--gold); }
+[data-theme="sky"] .title { font-weight: 500; font-size: 20px; }
+[data-theme="sky"] #when .title { font-size: 40px; font-weight: 400; letter-spacing: .01em; }
+[data-theme="sky"] .greeting { line-height: 2.15; }
+[data-theme="sky"] .parents { border-color: var(--gold-soft); }
+[data-theme="sky"] .calendar { border-color: var(--gold-soft); }
+[data-theme="sky"] .cal-grid span { font-size: 18px; }
+[data-theme="sky"] .cal-grid .on { background: var(--sky); color: #fff; }
+[data-theme="sky"] .countdown b { font-size: 36px; font-weight: 400; }
+[data-theme="sky"] .dday b { color: var(--gold); }
+
+/* 버튼 · 입력 */
+[data-theme="sky"] .btn { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+[data-theme="sky"] .btn.ghost { background: transparent; color: var(--ink); }
+[data-theme="sky"] .btn.kakao { background: #fee500; border-color: #fee500; color: #191919; }
+[data-theme="sky"] .segmented input:checked + span { background: var(--sky-pale); color: var(--ink); font-weight: 500; }
+[data-theme="sky"] .chip { border-color: var(--gold-soft); }
+[data-theme="sky"] .field input:focus,
+[data-theme="sky"] .field textarea:focus { border-color: var(--sky); }
+[data-theme="sky"] .gallery-grid { gap: 4px; }
+[data-theme="sky"] .gb-list { border-top-color: var(--gold); }
+
+/* 응모권: 하늘색 */
+[data-theme="sky"] .ticket { filter: drop-shadow(0 12px 22px rgba(61, 43, 31, .14)); }
+[data-theme="sky"] .ticket-top { border: 0; background: var(--ticket-bg); }
+[data-theme="sky"] .ticket-label { font-family: "Noto Sans KR", sans-serif; font-weight: 500; font-size: 11px; }
+[data-theme="sky"] .ticket-no { font-size: 60px; }
+
+/* 푸터: 코코아 브라운 */
+[data-theme="sky"] .footer { background: var(--ink); color: rgba(248, 244, 236, .65); }
+[data-theme="sky"] .footer::before { background: var(--sky); width: 2px; height: 30px; }
+[data-theme="sky"] .footer-sign { color: var(--paper); font-style: italic; font-size: 34px; }
+[data-theme="sky"] .footer .btn.ghost { color: var(--paper); border-color: rgba(248, 244, 236, .45); }

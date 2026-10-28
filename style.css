@@ -512,18 +512,22 @@ input, textarea, button { font-variant-numeric: lining-nums; }
   transform: translateX(-50%);
   z-index: 70;
   display: flex;
-  gap: 4px;
+  gap: 2px;
   padding: 5px;
   background: rgba(20, 20, 20, .86);
   border-radius: 999px;
   backdrop-filter: blur(6px);
   max-width: calc(100% - 24px);
+  overflow-x: auto;
+  scrollbar-width: none;
 }
+.theme-picker::-webkit-scrollbar { display: none; }
 .theme-picker button {
   font: 400 12px/1 "Noto Sans KR", sans-serif;
   border: 0;
   border-radius: 999px;
-  padding: 9px 12px;
+  padding: 9px 9px;
+  flex: none;
   background: transparent;
   color: rgba(255, 255, 255, .75);
   cursor: pointer;
