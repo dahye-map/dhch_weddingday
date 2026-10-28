@@ -1,0 +1,184 @@
+/* ============================================================
+   테마 — config.js 의 theme 값으로 선택
+   classic(기본, style.css) · romantic · minimal · winter
+   ============================================================ */
+
+/* ---------- 로맨틱 플라워: 연핑크 · 라벤더 · 아치 사진 · 꽃잎 ---------- */
+[data-theme="romantic"] {
+  --bg: #f1e4e8;
+  --paper: #fffafb;
+  --paper-2: #f9f1f6;
+  --ink: #5b4452;
+  --ink-2: #77606e;
+  --muted: #a8949f;
+  --line: #f1e1e7;
+  --line-strong: #e6cdd7;
+  --gold: #c7869a;
+  --gold-soft: #e9bccb;
+  --serif-ko: "Gowun Batang", serif;
+  --name-font: "Great Vibes", cursive;
+  --radius: 14px;
+  --cover-bg: linear-gradient(180deg, #fbe8ee 0%, #f6eef8 55%, #fffafb 100%);
+  --cover-sub: #a8949f;
+  --ticket-bg: #c7869a;
+  --ticket-fg: #fff;
+  --ticket-sub: rgba(255, 255, 255, .85);
+  --ticket-frame: rgba(255, 255, 255, .55);
+  --sun: #d0708a;
+}
+[data-theme="romantic"] .cover-photo { border-radius: 999px 999px 0 0; overflow: hidden; }
+[data-theme="romantic"] .cover-photo::after { border-radius: 999px 999px 0 0; border-color: rgba(255, 255, 255, .7); }
+[data-theme="romantic"] .cover-names { font-size: 52px; margin-top: 26px; }
+[data-theme="romantic"] .cover-names i { font-family: "Great Vibes", cursive; font-style: normal; }
+[data-theme="romantic"] .cover-date { letter-spacing: .18em; }
+[data-theme="romantic"] .eyebrow { font-style: italic; letter-spacing: .2em; }
+[data-theme="romantic"] .rule { width: auto; height: auto; background: none; color: var(--gold); }
+[data-theme="romantic"] .rule::before { content: "❀"; font-size: 16px; }
+[data-theme="romantic"] .section + .section::before,
+[data-theme="romantic"] .cover + .section::before,
+[data-theme="romantic"] .footer::before {
+  content: "✿"; width: auto; height: auto; background: none; color: var(--gold-soft);
+  transform: translate(-50%, 20px); font-size: 14px;
+}
+[data-theme="romantic"] .btn,
+[data-theme="romantic"] .segmented { border-radius: 999px; }
+[data-theme="romantic"] .btn { background: var(--gold); border-color: var(--gold); color: #fff; }
+[data-theme="romantic"] .btn.ghost { background: transparent; color: var(--gold); }
+[data-theme="romantic"] .btn.kakao { background: #fee500; border-color: #fee500; color: #191919; }
+[data-theme="romantic"] .segmented input:checked + span { background: var(--gold); }
+[data-theme="romantic"] .cal-grid .on { background: var(--gold); }
+[data-theme="romantic"] .gallery-grid { gap: 6px; }
+[data-theme="romantic"] .gallery-grid button { border-radius: 10px; }
+[data-theme="romantic"] .gb-list { border-top-color: var(--line-strong); }
+[data-theme="romantic"] .ticket-top { border: 0; background: var(--ticket-bg); }
+[data-theme="romantic"] .ticket-top,
+[data-theme="romantic"] .ticket-bottom { border-radius: 18px 18px 0 0; }
+[data-theme="romantic"] .ticket-bottom { border-radius: 0 0 18px 18px; }
+[data-theme="romantic"] .fall i {
+  width: 11px; height: 14px;
+  background: radial-gradient(circle at 30% 30%, #ffe3ea, #f2a9bd);
+  border-radius: 150% 0 150% 0;
+  opacity: .85;
+}
+
+/* ---------- 모던 미니멀: 화이트 · 차콜 · 세이지 포인트 ---------- */
+[data-theme="minimal"] {
+  --bg: #e8e8e6;
+  --paper: #ffffff;
+  --paper-2: #f5f5f3;
+  --ink: #161616;
+  --ink-2: #3f3f3f;
+  --muted: #8b8b8b;
+  --line: #ececec;
+  --line-strong: #d5d5d5;
+  --gold: #6f7f5f;
+  --gold-soft: #a7b496;
+  --serif-en: "Montserrat", sans-serif;
+  --serif-ko: "Noto Sans KR", sans-serif;
+  --name-font: "Montserrat", sans-serif;
+  --radius: 0;
+  --ticket-bg: #161616;
+  --ticket-fg: #fff;
+  --ticket-sub: rgba(255, 255, 255, .7);
+  --ticket-frame: transparent;
+  --sun: #6f7f5f;
+}
+[data-theme="minimal"] .cover { display: flex; flex-direction: column; text-align: left; padding: 56px 28px 48px; }
+[data-theme="minimal"] .cover-kicker { order: 1; letter-spacing: .3em; font-size: 11px; padding-left: 0; font-weight: 600; margin-bottom: 8px; }
+[data-theme="minimal"] .cover-big {
+  display: block; order: 2;
+  font-family: "Montserrat", sans-serif; font-weight: 300;
+  font-size: 92px; line-height: .95; letter-spacing: -.04em; margin: 0 0 32px;
+}
+[data-theme="minimal"] .cover-big small { display: block; font-size: 15px; letter-spacing: .3em; font-weight: 500; margin-top: 14px; color: var(--gold); }
+[data-theme="minimal"] .cover-photo { order: 3; aspect-ratio: 4 / 5; }
+[data-theme="minimal"] .cover-photo::after { display: none; }
+[data-theme="minimal"] .cover-names {
+  order: 4; font-size: 22px; font-weight: 500; text-transform: uppercase; letter-spacing: .16em;
+  margin: 28px 0 0; display: flex; flex-direction: column;
+}
+[data-theme="minimal"] .cover-names i { font-style: normal; color: var(--gold); margin: 2px 0; font-size: 14px; }
+[data-theme="minimal"] .cover-date { display: none; }
+[data-theme="minimal"] .rule { order: 5; margin: 22px 0; width: 24px; background: var(--ink); }
+[data-theme="minimal"] .cover-ko { order: 6; letter-spacing: 0; font-weight: 500; }
+[data-theme="minimal"] .cover-meta { order: 7; }
+[data-theme="minimal"] .section + .section::before,
+[data-theme="minimal"] .cover + .section::before,
+[data-theme="minimal"] .footer::before { left: 28px; right: 28px; width: auto; height: 1px; background: var(--line); }
+[data-theme="minimal"] .section { text-align: left; padding: 64px 28px; }
+[data-theme="minimal"] .eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .3em; padding-left: 0; }
+[data-theme="minimal"] .title { font-size: 22px; font-weight: 500; letter-spacing: -.01em; }
+[data-theme="minimal"] .greeting { font-size: 14px; line-height: 2; }
+[data-theme="minimal"] .parents { display: flex; padding: 20px 0; }
+[data-theme="minimal"] #when .title { font-size: 34px; font-weight: 300; letter-spacing: -.02em; }
+[data-theme="minimal"] .calendar,
+[data-theme="minimal"] .countdown { margin-left: 0; margin-right: 0; }
+[data-theme="minimal"] .countdown { justify-content: space-between; }
+[data-theme="minimal"] .countdown b { font-weight: 300; font-size: 32px; }
+[data-theme="minimal"] .countdown div { text-align: left; }
+[data-theme="minimal"] .cal-buttons { justify-content: flex-start; }
+[data-theme="minimal"] .cal-grid span { font-size: 14px; }
+[data-theme="minimal"] .cal-grid .on { background: var(--gold); border-radius: 0; }
+[data-theme="minimal"] .venue-addr { justify-content: flex-start; }
+[data-theme="minimal"] .chip { border-radius: 0; }
+[data-theme="minimal"] .gallery-grid { gap: 2px; }
+[data-theme="minimal"] .gallery-grid button:first-child { grid-column: span 3; grid-row: span 1; aspect-ratio: 3 / 2; }
+[data-theme="minimal"] .ticket { filter: none; }
+[data-theme="minimal"] .ticket-top { text-align: left; padding: 24px; border: 0; background: var(--ticket-bg); }
+[data-theme="minimal"] .ticket-top::before { display: none; }
+[data-theme="minimal"] .ticket-no { font-weight: 300; font-size: 60px; letter-spacing: -.02em; }
+[data-theme="minimal"] .ticket-bottom { text-align: left; border: 1px solid var(--ink); border-top: 0; }
+[data-theme="minimal"] .ticket-bottom::after { display: none; }
+[data-theme="minimal"] .ticket-top, [data-theme="minimal"] .ticket-bottom { border-radius: 0; }
+[data-theme="minimal"] .result { text-align: left; }
+[data-theme="minimal"] .footer { text-align: left; }
+[data-theme="minimal"] .footer-sign { font-style: normal; text-transform: uppercase; letter-spacing: .16em; font-size: 16px; font-weight: 500; }
+
+/* ---------- 윈터 감성: 딥그린 · 버건디 · 크림 · 눈 ---------- */
+[data-theme="winter"] {
+  --bg: #16291f;
+  --paper: #fbf7ef;
+  --paper-2: #f3ecdf;
+  --ink: #1e3a2e;
+  --ink-2: #3d5248;
+  --muted: #86907f;
+  --line: #e8dfcd;
+  --line-strong: #d6c9b0;
+  --gold: #8e2f3b;
+  --gold-soft: #c9a56a;
+  --serif-en: "Playfair Display", serif;
+  --name-font: "Playfair Display", serif;
+  --cover-bg: radial-gradient(120% 70% at 50% 0%, #2c5243 0%, #1e3a2e 60%, #172e24 100%);
+  --cover-fg: #f6efe1;
+  --cover-sub: rgba(246, 239, 225, .65);
+  --ticket-bg: #8e2f3b;
+  --ticket-fg: #f6e7c8;
+  --ticket-sub: rgba(246, 231, 200, .8);
+  --ticket-frame: rgba(201, 165, 106, .6);
+  --sun: #8e2f3b;
+}
+[data-theme="winter"] .cover { padding-bottom: 64px; }
+[data-theme="winter"] .cover-photo { outline: 1px solid rgba(201, 165, 106, .7); outline-offset: 8px; margin: 8px; }
+[data-theme="winter"] .cover-photo::after { display: none; }
+[data-theme="winter"] .cover-names { font-style: italic; font-size: 40px; }
+[data-theme="winter"] .cover-names i { color: var(--gold-soft); }
+[data-theme="winter"] .cover-date { font-size: 15px; letter-spacing: .32em; }
+[data-theme="winter"] .rule { background: var(--gold-soft); }
+[data-theme="winter"] .eyebrow { font-style: italic; letter-spacing: .22em; font-size: 15px; }
+[data-theme="winter"] #when .title { font-weight: 400; }
+[data-theme="winter"] .cal-grid .on { background: var(--gold); }
+[data-theme="winter"] .btn { background: var(--ink); border-color: var(--ink); }
+[data-theme="winter"] .btn.ghost { background: transparent; color: var(--ink); }
+[data-theme="winter"] .btn.kakao { background: #fee500; border-color: #fee500; color: #191919; }
+[data-theme="winter"] .segmented input:checked + span { background: var(--ink); }
+[data-theme="winter"] .footer { background: var(--ink); color: rgba(246, 239, 225, .65); }
+[data-theme="winter"] .footer::before { background: var(--gold-soft); }
+[data-theme="winter"] .footer-sign { color: #f6efe1; }
+[data-theme="winter"] .footer .btn.ghost { color: #f6efe1; border-color: rgba(246, 239, 225, .5); }
+[data-theme="winter"] .fall i {
+  width: var(--s); height: var(--s);
+  background: #fff;
+  border-radius: 50%;
+  opacity: .75;
+  filter: blur(.4px);
+}

@@ -26,6 +26,83 @@
   $("brideEn").textContent = C.bride.en || C.bride.name;
   $("coverDate").textContent = `${kst.getUTCFullYear()}. ${pad2(kst.getUTCMonth() + 1)}. ${pad2(kst.getUTCDate())}  ${enDays[kst.getUTCDay()]}`;
   $("footerSign").textContent = `${C.groom.en || C.groom.name} & ${C.bride.en || C.bride.name}`;
+  $("bigMD").textContent = `${pad2(kst.getUTCMonth() + 1)}.${pad2(kst.getUTCDate())}`;
+  $("bigY").textContent = `${kst.getUTCFullYear()} ${enDays[kst.getUTCDay()]}`;
+
+  // ---------- 디자인 테마 ----------
+  const THEMES = {
+    classic: { label: "클래식", fonts: null },
+    romantic: { label: "로맨틱", fonts: "family=Great+Vibes&family=Gowun+Batang:wght@400;700", fall: "petal" },
+    minimal: { label: "미니멀", fonts: "family=Montserrat:wght@300;400;500;600" },
+    winter: { label: "윈터", fonts: "family=Playfair+Display:ital,wght@0,400;0,500;1,400", fall: "snow" },
+  };
+  const params = new URLSearchParams(location.search);
+  const loadedFonts = {};
+
+  function startFall(kind) {
+    const cover = document.querySelector(".cover");
+    const old = cover.querySelector(".fall");
+    if (old) old.remove();
+    if (!kind || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const box = document.createElement("div");
+    box.className = "fall";
+    box.setAttribute("aria-hidden", "true");
+    const n = kind === "snow" ? 34 : 16;
+    for (let i = 0; i < n; i++) {
+      const p = document.createElement("i");
+      const dur = (kind === "snow" ? 9 : 11) + Math.random() * 9;
+      p.style.left = `${Math.random() * 100}%`;
+      p.style.animationDuration = `${dur}s`;
+      p.style.animationDelay = `${-Math.random() * dur}s`;
+      p.style.setProperty("--sway", `${(Math.random() - 0.5) * 80}px`);
+      p.style.setProperty("--s", `${2 + Math.random() * 4}px`);
+      box.appendChild(p);
+    }
+    cover.prepend(box);
+    sizeFall();
+  }
+  function sizeFall() {
+    const cover = document.querySelector(".cover");
+    const box = cover.querySelector(".fall");
+    if (box) box.style.setProperty("--fall-h", `${cover.offsetHeight + 40}px`);
+  }
+  addEventListener("resize", sizeFall);
+
+  function applyTheme(name) {
+    const t = THEMES[name] ? name : "classic";
+    document.documentElement.dataset.theme = t;
+    const fonts = THEMES[t].fonts;
+    if (fonts && !loadedFonts[t]) {
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = `https://fonts.googleapis.com/css2?${fonts}&display=swap`;
+      document.head.appendChild(link);
+      loadedFonts[t] = true;
+    }
+    startFall(THEMES[t].fall);
+    document.querySelectorAll(".theme-picker button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.theme === t));
+  }
+
+  // ?theme=xxx 로 열면 하단에 테마 비교 버튼 표시 (하객에게 보내는 주소에는 붙이지 마세요)
+  if (params.has("theme")) {
+    const bar = document.createElement("div");
+    bar.className = "theme-picker";
+    Object.entries(THEMES).forEach(([key, t]) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.dataset.theme = key;
+      b.textContent = t.label;
+      b.addEventListener("click", () => {
+        params.set("theme", key);
+        history.replaceState(null, "", `?${params}`);
+        applyTheme(key);
+      });
+      bar.appendChild(b);
+    });
+    document.body.appendChild(bar);
+    document.body.classList.add("has-picker");
+  }
+  applyTheme(params.get("theme") || C.theme);
 
   // 예식 일시 — 달력
   $("whenTitle").textContent = `${kst.getUTCFullYear()}. ${kst.getUTCMonth() + 1}. ${kst.getUTCDate()}`;

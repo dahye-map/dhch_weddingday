@@ -25,8 +25,20 @@
 배포 주소가 정해지면 `og:image`, `og:url`을 실제 주소로 바꿔주세요 (이미지는 `images/share.jpg` 등으로 추가).
 카카오톡은 미리보기를 캐시하므로, 수정 후에는 [카카오 공유 디버거](https://developers.kakao.com/tool/debugger/sharing)에서 캐시를 초기화하세요.
 
-## 디자인
-클래식 에디토리얼 (아이보리 · 블랙 · 골드). 색상은 `style.css` 맨 위 `:root` 변수에서 한 번에 바꿀 수 있습니다.
+## 디자인 테마
+`config.js`의 `theme` 값으로 4가지 중 선택합니다.
+
+| 값 | 분위기 |
+|---|---|
+| `classic` | 클래식 에디토리얼 — 아이보리 · 블랙 · 골드, 세리프 타이포 (기본) |
+| `romantic` | 로맨틱 플라워 — 연핑크 · 라벤더, 아치형 사진, 꽃잎 날리는 효과 |
+| `minimal` | 모던 미니멀 — 화이트 · 차콜 · 세이지, 큰 날짜 숫자, 왼쪽 정렬 |
+| `winter` | 윈터 감성 — 딥그린 · 버건디 · 크림, 눈 내리는 효과 |
+
+**비교해 보기:** 주소 뒤에 `?theme=romantic`처럼 붙여서 열면 화면 아래에 테마 전환 버튼이 나타납니다.
+하객에게 보내는 주소에는 `?theme=`를 붙이지 마세요.
+
+공통 레이아웃은 `style.css`, 테마별 색상·글꼴은 `themes.css`에 있습니다.
 커버의 영문 이름은 `config.js`의 `groom.en`, `bride.en`에서 수정하세요.
 
 ## 사진 바꾸기
@@ -39,6 +51,7 @@
 |---|---|
 | `config.js` | 이름, 날짜, 장소, 인사말, 응원 메세지 목록, API 주소 — **여기만 수정** |
 | `index.html` / `style.css` / `script.js` | 청첩장 화면 |
+| `themes.css` | 디자인 테마 4종 |
 | `images/gallery/` | 갤러리 사진 (지금은 임시 이미지) |
 | `apps-script/Code.gs` | Google Sheets 저장용 백엔드 |
 

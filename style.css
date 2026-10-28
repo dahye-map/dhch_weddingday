@@ -17,6 +17,16 @@
   --serif-ko: "Noto Serif KR", serif;
   --sans: "Noto Sans KR", system-ui, sans-serif;
   --radius: 2px;
+  /* 테마별로 바꾸는 값 (themes.css) */
+  --name-font: var(--serif-en);
+  --cover-bg: transparent;
+  --cover-fg: var(--ink);
+  --cover-sub: var(--muted);
+  --ticket-bg: var(--ink);
+  --ticket-fg: #e6d3ad;
+  --ticket-sub: rgba(230, 211, 173, 0.75);
+  --ticket-frame: rgba(201, 173, 124, 0.45);
+  --sun: #b2543f;
 }
 
 * { box-sizing: border-box; }
@@ -36,6 +46,7 @@ body {
 }
 
 b, strong { font-weight: 500; }
+input, textarea, button { font-variant-numeric: lining-nums; }
 
 .card {
   max-width: 440px;
@@ -50,7 +61,13 @@ b, strong { font-weight: 500; }
 .cover {
   padding: 44px 28px 56px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--cover-bg);
+  color: var(--cover-fg);
 }
+.cover > * { position: relative; z-index: 1; }
+.cover-big { display: none; }
 .cover-kicker {
   font-family: var(--serif-en);
   font-size: 13px;
@@ -58,7 +75,8 @@ b, strong { font-weight: 500; }
   letter-spacing: 0.42em;
   margin: 0 0 22px;
   padding-left: 0.42em;
-  color: var(--ink-2);
+  color: var(--cover-fg);
+  opacity: .8;
 }
 .cover-photo {
   margin: 0;
@@ -75,7 +93,7 @@ b, strong { font-weight: 500; }
   pointer-events: none;
 }
 .cover-names {
-  font-family: var(--serif-en);
+  font-family: var(--name-font);
   font-weight: 400;
   font-size: 42px;
   line-height: 1.15;
@@ -104,7 +122,7 @@ b, strong { font-weight: 500; }
   margin: 26px auto;
 }
 .cover-ko { font-family: var(--serif-ko); font-size: 15px; margin: 0 0 6px; letter-spacing: 0.08em; }
-.cover-meta { margin: 0; color: var(--muted); font-size: 13px; }
+.cover-meta { margin: 0; color: var(--cover-sub); font-size: 13px; }
 
 /* ---------- 공통 섹션 ---------- */
 .section {
@@ -182,7 +200,7 @@ b, strong { font-weight: 500; }
 .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 4px; font-size: 14px; }
 .cal-grid span { height: 36px; display: flex; align-items: center; justify-content: center; font-family: var(--serif-en); font-size: 16px; }
 .cal-grid .cal-dow { font-size: 12px; color: var(--muted); letter-spacing: 0.1em; height: 28px; }
-.cal-grid .sun { color: #b2543f; }
+.cal-grid .sun { color: var(--sun); }
 .cal-grid .on {
   background: var(--ink);
   color: var(--paper);
@@ -312,13 +330,13 @@ b, strong { font-weight: 500; }
   animation: pop .6s cubic-bezier(.2, 1.3, .4, 1);
 }
 .ticket-top {
-  background: var(--ink);
-  color: var(--gold-soft);
+  background: var(--ticket-bg);
+  color: var(--ticket-fg);
   padding: 30px 20px 26px;
   position: relative;
   border-radius: 6px 6px 0 0;
   /* 안쪽 금색 테두리 */
-  background-image: linear-gradient(var(--ink), var(--ink)), linear-gradient(135deg, #c9ad7c, #8c6d3a);
+  background-image: linear-gradient(var(--ticket-bg), var(--ticket-bg)), linear-gradient(135deg, #c9ad7c, #8c6d3a);
   background-clip: padding-box, border-box;
   border: 1px solid transparent;
 }
@@ -326,7 +344,7 @@ b, strong { font-weight: 500; }
   content: "";
   position: absolute;
   inset: 8px 8px 0;
-  border: 1px solid rgba(201, 173, 124, 0.45);
+  border: 1px solid var(--ticket-frame);
   border-bottom: 0;
 }
 .ticket-label { margin: 0; font-family: var(--serif-en); font-size: 12px; letter-spacing: 0.45em; padding-left: .45em; }
@@ -337,9 +355,9 @@ b, strong { font-weight: 500; }
   font-weight: 500;
   letter-spacing: 0.04em;
   line-height: 1.15;
-  color: #e6d3ad;
+  color: var(--ticket-fg);
 }
-.ticket-who { margin: 0; font-size: 13px; color: rgba(230, 211, 173, 0.75); letter-spacing: 0.04em; }
+.ticket-who { margin: 0; font-size: 13px; color: var(--ticket-sub); letter-spacing: 0.04em; }
 .ticket-bottom {
   background: #fff;
   padding: 22px 20px;
@@ -441,7 +459,7 @@ b, strong { font-weight: 500; }
 /* ---------- 푸터 / 공유 ---------- */
 .footer { padding: 72px 28px 64px; text-align: center; color: var(--muted); font-size: 13px; position: relative; }
 .share { display: flex; flex-direction: column; gap: 8px; margin-bottom: 44px; }
-.footer-sign { font-family: var(--serif-en); font-style: italic; font-size: 26px; color: var(--ink); margin: 0 0 4px; }
+.footer-sign { font-family: var(--name-font); font-style: italic; font-size: 26px; color: var(--ink); margin: 0 0 4px; }
 .footer p { margin: 0; }
 
 /* ---------- 토스트 ---------- */
@@ -470,3 +488,45 @@ b, strong { font-weight: 500; }
   .ticket, .cheer { animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
 }
+
+/* ---------- 꽃잎 / 눈 내리는 효과 (로맨틱 · 윈터 테마) ---------- */
+.fall { position: absolute; inset: 0; z-index: 2 !important; pointer-events: none; overflow: hidden; }
+.fall i {
+  position: absolute;
+  top: -24px;
+  animation: fall linear infinite;
+  will-change: transform;
+}
+@keyframes fall {
+  0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  50% { transform: translate3d(var(--sway), calc(var(--fall-h) * .5), 0) rotate(180deg); }
+  100% { transform: translate3d(0, var(--fall-h), 0) rotate(360deg); }
+}
+
+/* ---------- 디자인 미리보기 바 (?theme= 로 열었을 때만) ---------- */
+.theme-picker {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 70;
+  display: flex;
+  gap: 4px;
+  padding: 5px;
+  background: rgba(20, 20, 20, .86);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+  max-width: calc(100% - 24px);
+}
+.theme-picker button {
+  font: 400 12px/1 "Noto Sans KR", sans-serif;
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 12px;
+  background: transparent;
+  color: rgba(255, 255, 255, .75);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.theme-picker button[aria-pressed="true"] { background: #fff; color: #111; }
+.has-picker .footer { padding-bottom: 120px; }
