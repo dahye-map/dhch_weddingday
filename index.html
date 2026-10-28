@@ -11,43 +11,59 @@
   <meta property="og:image" content="https://example.github.io/dhch_weddingday/images/share.jpg" />
   <meta property="og:url" content="https://example.github.io/dhch_weddingday/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+KR:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <main class="card">
     <!-- 표지 -->
     <section class="cover">
-      <p class="eyebrow">WEDDING INVITATION</p>
-      <h1><span id="groomName"></span><span class="amp">&</span><span id="brideName"></span></h1>
-      <p class="when" id="dateText"></p>
-      <p class="where" id="venueText"></p>
+      <p class="cover-kicker">THE WEDDING OF</p>
+      <figure class="cover-photo"><img id="coverImg" alt="신랑 신부 대표 사진" /></figure>
+      <h1 class="cover-names"><span id="groomEn"></span><i>&amp;</i><span id="brideEn"></span></h1>
+      <p class="cover-date" id="coverDate"></p>
+      <hr class="rule" />
+      <p class="cover-ko"><span id="groomName"></span> · <span id="brideName"></span></p>
+      <p class="cover-meta" id="dateText"></p>
+      <p class="cover-meta" id="venueText"></p>
     </section>
 
     <!-- 인사말 -->
     <section class="section">
-      <h2 class="title">초대합니다</h2>
+      <p class="eyebrow">INVITATION</p>
+      <h2 class="title">소중한 분들을 초대합니다</h2>
       <p class="greeting" id="greeting"></p>
       <div class="parents">
         <p><span id="groomParents"></span> <b id="groomName2"></b></p>
         <p><span id="brideParents"></span> <b id="brideName2"></b></p>
       </div>
+    </section>
+
+    <!-- 예식 일시 -->
+    <section class="section" id="when">
+      <p class="eyebrow">WEDDING DAY</p>
+      <h2 class="title" id="whenTitle"></h2>
+      <p class="desc" id="whenSub"></p>
+      <div class="calendar" id="calendar"></div>
+      <div class="countdown" id="countdown" aria-live="off"></div>
       <p class="dday" id="dday"></p>
       <div class="cal-buttons">
-        <button type="button" class="chip" id="addIcs">📅 캘린더에 추가</button>
+        <button type="button" class="chip" id="addIcs">캘린더에 추가</button>
         <a class="chip" id="addGoogle" target="_blank" rel="noopener">구글 캘린더</a>
       </div>
     </section>
 
     <!-- 사진 갤러리 -->
     <section class="section" id="gallery">
-      <h2 class="title">GALLERY</h2>
+      <p class="eyebrow">GALLERY</p>
+      <h2 class="title">우리의 순간</h2>
       <div class="gallery-grid" id="galleryGrid"></div>
       <button type="button" class="btn ghost more" id="galleryMore" hidden>사진 더보기</button>
     </section>
 
     <!-- 오시는 길 -->
     <section class="section" id="location">
+      <p class="eyebrow">LOCATION</p>
       <h2 class="title">오시는 길</h2>
       <p class="venue-name" id="locVenue"></p>
       <p class="venue-addr">
@@ -66,7 +82,8 @@
 
     <!-- 1. 참석 여부 -->
     <section class="section" id="rsvp">
-      <h2 class="title">참석 여부</h2>
+      <p class="eyebrow">R.S.V.P.</p>
+      <h2 class="title">참석 여부 전달</h2>
       <p class="desc">원활한 식사 준비를 위해<br />참석 여부를 알려주세요.</p>
 
       <form id="rsvpForm" class="form" novalidate>
@@ -115,7 +132,8 @@
 
     <!-- 2. 럭키드로우 -->
     <section class="section lucky" id="lucky">
-      <h2 class="title">LUCKY DRAW</h2>
+      <p class="eyebrow">LUCKY DRAW</p>
+      <h2 class="title">행운의 추첨</h2>
       <p class="desc">예식 당일 추첨을 통해 선물을 드려요!<br />전화번호 뒷자리로 응모해 주세요.</p>
 
       <form id="luckyForm" class="form" novalidate>
@@ -146,7 +164,8 @@
 
     <!-- 방명록 -->
     <section class="section" id="guestbook">
-      <h2 class="title">방명록</h2>
+      <p class="eyebrow">GUESTBOOK</p>
+      <h2 class="title">축하의 한마디</h2>
       <p class="desc">두 사람에게 축하 메세지를 남겨주세요.</p>
       <form id="gbForm" class="form" novalidate>
         <label class="field">
@@ -167,6 +186,7 @@
 
     <!-- 마음 전하실 곳 -->
     <section class="section" id="accounts">
+      <p class="eyebrow">WITH LOVE</p>
       <h2 class="title">마음 전하실 곳</h2>
       <p class="desc">참석이 어려우신 분들을 위해<br />계좌번호를 안내드립니다.</p>
       <div class="accordion">
@@ -186,6 +206,7 @@
         <button type="button" class="btn kakao" id="shareKakao">카카오톡으로 공유하기</button>
         <button type="button" class="btn ghost" id="shareLink">링크 복사하기</button>
       </div>
+      <p class="footer-sign" id="footerSign"></p>
       <p>오셔서 자리를 빛내주세요.</p>
     </footer>
   </main>

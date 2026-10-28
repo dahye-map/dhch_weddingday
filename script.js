@@ -4,25 +4,116 @@
 
   // ---------- 기본 정보 ----------
   const date = new Date(C.date);
+  // 하객이 해외에 있어도 예식 시각이 한국 시간 기준으로 보이도록
+  const kst = new Date(date.getTime() + 9 * 3600000);
   const days = ["일", "월", "화", "수", "목", "금", "토"];
-  const hour = date.getHours();
-  const timeText = `${hour < 12 ? "오전" : "오후"} ${hour % 12 || 12}시${date.getMinutes() ? ` ${date.getMinutes()}분` : ""}`;
+  const hour = kst.getUTCHours();
+  const timeText = `${hour < 12 ? "오전" : "오후"} ${hour % 12 || 12}시${kst.getUTCMinutes() ? ` ${kst.getUTCMinutes()}분` : ""}`;
 
   $("groomName").textContent = $("groomName2").textContent = C.groom.name;
   $("brideName").textContent = $("brideName2").textContent = C.bride.name;
   $("groomParents").textContent = C.groom.parents;
   $("brideParents").textContent = C.bride.parents;
-  $("dateText").textContent = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${days[date.getDay()]}요일 ${timeText}`;
+  $("dateText").textContent = `${kst.getUTCFullYear()}년 ${kst.getUTCMonth() + 1}월 ${kst.getUTCDate()}일 ${days[kst.getUTCDay()]}요일 ${timeText}`;
   $("venueText").textContent = C.venue;
   $("greeting").textContent = C.greeting;
+
+  // 커버
+  const enDays = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  const pad2 = (n) => String(n).padStart(2, "0");
+  $("coverImg").src = C.coverImage;
+  $("groomEn").textContent = C.groom.en || C.groom.name;
+  $("brideEn").textContent = C.bride.en || C.bride.name;
+  $("coverDate").textContent = `${kst.getUTCFullYear()}. ${pad2(kst.getUTCMonth() + 1)}. ${pad2(kst.getUTCDate())}  ${enDays[kst.getUTCDay()]}`;
+  $("footerSign").textContent = `${C.groom.en || C.groom.name} & ${C.bride.en || C.bride.name}`;
+
+  // 예식 일시 — 달력
+  $("whenTitle").textContent = `${kst.getUTCFullYear()}. ${kst.getUTCMonth() + 1}. ${kst.getUTCDate()}`;
+  $("whenSub").textContent = `${days[kst.getUTCDay()]}요일 ${timeText}`;
+
+  (function renderCalendar() {
+    const cal = $("calendar");
+    const y = kst.getUTCFullYear();
+    const m = kst.getUTCMonth();
+    const first = new Date(y, m, 1).getDay();
+    const last = new Date(y, m + 1, 0).getDate();
+    const head = document.createElement("p");
+    head.className = "cal-month";
+    head.textContent = date.toLocaleString("en-US", { month: "long", timeZone: "Asia/Seoul" }).toUpperCase();
+    const grid = document.createElement("div");
+    grid.className = "cal-grid";
+    enDays.forEach((d, i) => {
+      const c = document.createElement("span");
+      c.className = "cal-dow" + (i === 0 ? " sun" : "");
+      c.textContent = d.charAt(0);
+      grid.appendChild(c);
+    });
+    for (let i = 0; i < first; i++) grid.appendChild(document.createElement("span"));
+    for (let d = 1; d <= last; d++) {
+      const c = document.createElement("span");
+      const dow = (first + d - 1) % 7;
+      c.className = (dow === 0 ? "sun" : "") + (d === kst.getUTCDate() ? " on" : "");
+      c.textContent = d;
+      grid.appendChild(c);
+    }
+    cal.append(head, grid);
+  })();
+
+  // 카운트다운
+  const cd = $("countdown");
+  const units = [["DAYS", 86400000], ["HOUR", 3600000], ["MIN", 60000], ["SEC", 1000]];
+  const cells = units.map(([label]) => {
+    const box = document.createElement("div");
+    const num = document.createElement("b");
+    const lab = document.createElement("span");
+    lab.textContent = label;
+    box.append(num, lab);
+    cd.appendChild(box);
+    return num;
+  });
+  function tick() {
+    let left = Math.max(0, date - Date.now());
+    units.forEach(([, ms], i) => {
+      cells[i].textContent = i === 0 ? Math.floor(left / ms) : pad2(Math.floor(left / ms));
+      left %= ms;
+    });
+  }
+  tick();
+  if (date > Date.now()) setInterval(tick, 1000);
+  else cd.hidden = true;
 
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const target = new Date(date);
   target.setHours(0, 0, 0, 0);
   const diff = Math.round((target - today) / 86400000);
-  $("dday").textContent =
-    diff > 0 ? `결혼식까지 D-${diff}` : diff === 0 ? "오늘 결혼합니다 💍" : "축복해 주셔서 감사합니다";
+  $("dday").innerHTML = "";
+  if (diff > 0) {
+    $("dday").append(`${C.groom.name} ♥ ${C.bride.name}의 결혼식이 `);
+    const b = document.createElement("b");
+    b.textContent = `${diff}일`;
+    $("dday").append(b, " 남았습니다");
+  } else {
+    $("dday").textContent = diff === 0 ? "오늘, 저희 결혼합니다" : "축복해 주셔서 감사합니다";
+  }
+
+  // 스크롤 시 섹션이 부드럽게 나타나는 효과
+  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll(".section").forEach((s) => {
+      s.classList.add("reveal");
+      io.observe(s);
+    });
+  }
 
   // ---------- 공통 ----------
   function toast(msg) {

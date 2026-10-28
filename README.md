@@ -25,8 +25,13 @@
 배포 주소가 정해지면 `og:image`, `og:url`을 실제 주소로 바꿔주세요 (이미지는 `images/share.jpg` 등으로 추가).
 카카오톡은 미리보기를 캐시하므로, 수정 후에는 [카카오 공유 디버거](https://developers.kakao.com/tool/debugger/sharing)에서 캐시를 초기화하세요.
 
+## 디자인
+클래식 에디토리얼 (아이보리 · 블랙 · 골드). 색상은 `style.css` 맨 위 `:root` 변수에서 한 번에 바꿀 수 있습니다.
+커버의 영문 이름은 `config.js`의 `groom.en`, `bride.en`에서 수정하세요.
+
 ## 사진 바꾸기
-`images/gallery/`에 사진(jpg 등)을 넣고 `config.js`의 `gallery` 목록을 그 파일명으로 바꾸세요.
+- **커버 대표 사진:** `images/`에 세로 사진(3:4 비율 권장)을 넣고 `config.js`의 `coverImage`를 그 경로로 바꾸세요.
+- **갤러리:** `images/gallery/`에 사진(jpg 등)을 넣고 `config.js`의 `gallery` 목록을 그 파일명으로 바꾸세요. 첫 번째 사진은 크게 보입니다.
 모바일 로딩 속도를 위해 사진은 가로 1200px 이하, 장당 500KB 안팎으로 줄여서 넣는 걸 권장합니다.
 
 ## 파일

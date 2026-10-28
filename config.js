@@ -1,7 +1,9 @@
 // 청첩장 기본 정보 — 이 파일만 수정하면 됩니다.
 window.WEDDING_CONFIG = {
-  groom: { name: "신랑이름", parents: "아버지 · 어머니의 아들" },
-  bride: { name: "신부이름", parents: "아버지 · 어머니의 딸" },
+  groom: { name: "신랑이름", en: "Groom", parents: "아버지 · 어머니의 아들" },
+  bride: { name: "신부이름", en: "Bride", parents: "아버지 · 어머니의 딸" },
+  // 커버 대표 사진 (세로 사진 권장, 3:4 비율)
+  coverImage: "images/cover.svg",
   date: "2026-12-12T12:30:00+09:00",
   venue: "OO웨딩홀 3층 그랜드홀",
   address: "서울특별시 OO구 OO로 123",
