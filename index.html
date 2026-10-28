@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>모바일 청첩장</title>
+  <meta property="og:title" content="저희 결혼합니다" />
+  <meta property="og:description" content="소중한 분들을 초대합니다." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="card">
+    <!-- 표지 -->
+    <section class="cover">
+      <p class="eyebrow">WEDDING INVITATION</p>
+      <h1><span id="groomName"></span><span class="amp">&</span><span id="brideName"></span></h1>
+      <p class="when" id="dateText"></p>
+      <p class="where" id="venueText"></p>
+    </section>
+
+    <!-- 인사말 -->
+    <section class="section">
+      <h2 class="title">초대합니다</h2>
+      <p class="greeting" id="greeting"></p>
+      <div class="parents">
+        <p><span id="groomParents"></span> <b id="groomName2"></b></p>
+        <p><span id="brideParents"></span> <b id="brideName2"></b></p>
+      </div>
+      <p class="dday" id="dday"></p>
+    </section>
+
+    <!-- 1. 참석 여부 -->
+    <section class="section" id="rsvp">
+      <h2 class="title">참석 여부</h2>
+      <p class="desc">원활한 식사 준비를 위해<br />참석 여부를 알려주세요.</p>
+
+      <form id="rsvpForm" class="form" novalidate>
+        <div class="segmented" role="radiogroup" aria-label="구분">
+          <label><input type="radio" name="side" value="신랑측" checked /><span>신랑측</span></label>
+          <label><input type="radio" name="side" value="신부측" /><span>신부측</span></label>
+        </div>
+
+        <div class="segmented" role="radiogroup" aria-label="참석 여부">
+          <label><input type="radio" name="attend" value="참석" checked /><span>참석할게요</span></label>
+          <label><input type="radio" name="attend" value="불참" /><span>마음만 전할게요</span></label>
+        </div>
+
+        <label class="field">
+          <span>성함</span>
+          <input type="text" name="name" maxlength="20" placeholder="성함을 입력해 주세요" required />
+        </label>
+
+        <div class="attend-only">
+          <label class="field">
+            <span>참석 인원 (본인 포함)</span>
+            <div class="stepper">
+              <button type="button" data-step="-1" aria-label="인원 줄이기">−</button>
+              <input type="number" name="count" value="1" min="1" max="10" readonly />
+              <button type="button" data-step="1" aria-label="인원 늘리기">+</button>
+            </div>
+          </label>
+
+          <div class="segmented" role="radiogroup" aria-label="식사 여부">
+            <label><input type="radio" name="meal" value="식사함" checked /><span>식사할게요</span></label>
+            <label><input type="radio" name="meal" value="식사안함" /><span>식사는 괜찮아요</span></label>
+          </div>
+        </div>
+
+        <p class="error" id="rsvpError" role="alert"></p>
+        <button type="submit" class="btn">참석 여부 전달하기</button>
+      </form>
+
+      <div class="result" id="rsvpDone" hidden>
+        <p class="result-icon">💌</p>
+        <p class="result-title" id="rsvpDoneTitle"></p>
+        <p class="result-sub" id="rsvpDoneSub"></p>
+        <button type="button" class="btn ghost" id="rsvpEdit">다시 작성하기</button>
+      </div>
+    </section>
+
+    <!-- 2. 럭키드로우 -->
+    <section class="section lucky" id="lucky">
+      <h2 class="title">LUCKY DRAW</h2>
+      <p class="desc">예식 당일 추첨을 통해 선물을 드려요!<br />전화번호 뒷자리로 응모해 주세요.</p>
+
+      <form id="luckyForm" class="form" novalidate>
+        <label class="field">
+          <span>성함</span>
+          <input type="text" name="name" maxlength="20" placeholder="성함을 입력해 주세요" required />
+        </label>
+        <label class="field">
+          <span>전화번호 뒷자리 4자리</span>
+          <input type="tel" name="phone4" inputmode="numeric" maxlength="4" pattern="\d{4}" placeholder="0000" class="digits" required />
+        </label>
+        <p class="error" id="luckyError" role="alert"></p>
+        <button type="submit" class="btn">응모하기</button>
+      </form>
+
+      <div class="ticket" id="ticket" hidden>
+        <div class="ticket-top">
+          <p class="ticket-label">LUCKY TICKET</p>
+          <p class="ticket-no" id="ticketNo"></p>
+          <p class="ticket-who" id="ticketWho"></p>
+        </div>
+        <div class="ticket-bottom">
+          <p class="cheer" id="cheer"></p>
+          <p class="ticket-note" id="ticketNote"></p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>오셔서 자리를 빛내주세요.</p>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
