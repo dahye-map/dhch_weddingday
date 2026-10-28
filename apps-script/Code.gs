@@ -2,18 +2,22 @@
  * 모바일 청첩장 백엔드 (Google Apps Script)
  * - "참석여부" 시트: 참석 여부 응답 저장
  * - "럭키드로우" 시트: 응모 저장 및 응모권 번호 순차 발급
+ * - "방명록" 시트: 축하 메세지 저장 및 목록 제공
  *
  * 배포: 확장 프로그램 > Apps Script 에 붙여넣기 → 배포 > 새 배포 > 웹 앱
  *       (실행 사용자: 나 / 액세스 권한: 모든 사용자) → URL을 config.js 의 apiUrl 에 입력
  */
 const RSVP_SHEET = "참석여부";
 const LUCKY_SHEET = "럭키드로우";
+const GUESTBOOK_SHEET = "방명록"; // 부적절한 글은 시트에서 행을 삭제하면 사라집니다
 
 function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
     if (data.type === "rsvp") return json(saveRsvp(data));
     if (data.type === "lucky") return json(enterLucky(data));
+    if (data.type === "guestbook_write") return json(writeGuestbook(data));
+    if (data.type === "guestbook_list") return json(listGuestbook());
     return json({ ok: false, error: "unknown type" });
   } catch (err) {
     return json({ ok: false, error: String(err) });
@@ -50,6 +54,27 @@ function enterLucky(d) {
   }
 }
 
+function writeGuestbook(d) {
+  const name = clean(d.name, 20);
+  const message = clean(d.message, 200);
+  if (!name || !message) return { ok: false, error: "invalid input" };
+  const time = new Date();
+  getSheet(GUESTBOOK_SHEET, ["시각", "성함", "메세지"]).appendRow([time, name, message]);
+  return { ok: true, item: { name: name, message: message, time: time.toISOString() } };
+}
+
+function listGuestbook() {
+  const sheet = getSheet(GUESTBOOK_SHEET, ["시각", "성함", "메세지"]);
+  if (sheet.getLastRow() < 2) return { ok: true, items: [] };
+  const rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, 3).getDisplayValues();
+  const times = sheet.getRange(2, 1, sheet.getLastRow() - 1, 1).getValues();
+  const items = rows
+    .map((r, i) => ({ time: times[i][0] instanceof Date ? times[i][0].toISOString() : "", name: r[1], message: r[2] }))
+    .filter((it) => it.name && it.message)
+    .reverse(); // 최신 글이 위로
+  return { ok: true, items: items };
+}
+
 function getSheet(name, headers) {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getSheetByName(name);
@@ -62,8 +87,8 @@ function getSheet(name, headers) {
 }
 
 // 수식 주입 방지 + 길이 제한
-function clean(v) {
-  return String(v || "").trim().replace(/^[=+\-@]/, "'$&").slice(0, 30);
+function clean(v, max) {
+  return String(v || "").trim().replace(/^[=+\-@]/, "'$&").slice(0, max || 30);
 }
 
 function json(obj) {

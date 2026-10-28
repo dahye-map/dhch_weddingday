@@ -4,8 +4,12 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>모바일 청첩장</title>
+  <!-- 링크 미리보기 (카카오톡·문자 등). 배포 주소가 정해지면 og:image / og:url 을 실제 주소로 바꿔주세요 -->
+  <meta property="og:type" content="website" />
   <meta property="og:title" content="저희 결혼합니다" />
   <meta property="og:description" content="소중한 분들을 초대합니다." />
+  <meta property="og:image" content="https://example.github.io/dhch_weddingday/images/share.jpg" />
+  <meta property="og:url" content="https://example.github.io/dhch_weddingday/" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -29,6 +33,10 @@
         <p><span id="brideParents"></span> <b id="brideName2"></b></p>
       </div>
       <p class="dday" id="dday"></p>
+      <div class="cal-buttons">
+        <button type="button" class="chip" id="addIcs">📅 캘린더에 추가</button>
+        <a class="chip" id="addGoogle" target="_blank" rel="noopener">구글 캘린더</a>
+      </div>
     </section>
 
     <!-- 사진 갤러리 -->
@@ -136,6 +144,27 @@
       </div>
     </section>
 
+    <!-- 방명록 -->
+    <section class="section" id="guestbook">
+      <h2 class="title">방명록</h2>
+      <p class="desc">두 사람에게 축하 메세지를 남겨주세요.</p>
+      <form id="gbForm" class="form" novalidate>
+        <label class="field">
+          <span>성함</span>
+          <input type="text" name="name" maxlength="20" placeholder="성함을 입력해 주세요" required />
+        </label>
+        <label class="field">
+          <span>메세지 <em class="counter" id="gbCounter">0/200</em></span>
+          <textarea name="message" maxlength="200" rows="3" placeholder="축하의 마음을 전해주세요" required></textarea>
+        </label>
+        <p class="error" id="gbError" role="alert"></p>
+        <button type="submit" class="btn">남기기</button>
+      </form>
+      <ul class="gb-list" id="gbList"></ul>
+      <p class="gb-empty" id="gbEmpty" hidden>첫 번째 축하 메세지를 남겨주세요 💐</p>
+      <button type="button" class="btn ghost more" id="gbMore" hidden>더보기</button>
+    </section>
+
     <!-- 마음 전하실 곳 -->
     <section class="section" id="accounts">
       <h2 class="title">마음 전하실 곳</h2>
@@ -153,6 +182,10 @@
     </section>
 
     <footer class="footer">
+      <div class="share">
+        <button type="button" class="btn kakao" id="shareKakao">카카오톡으로 공유하기</button>
+        <button type="button" class="btn ghost" id="shareLink">링크 복사하기</button>
+      </div>
       <p>오셔서 자리를 빛내주세요.</p>
     </footer>
   </main>

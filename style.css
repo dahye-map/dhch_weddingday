@@ -257,3 +257,34 @@ body {
 .account-info .role { font-size: 12px; color: var(--muted); }
 .account-info .num { word-break: break-all; }
 .account-list .chip { flex: none; padding: 6px 12px; }
+
+/* 캘린더 */
+.cal-buttons { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+.cal-buttons .chip { padding: 7px 14px; font-size: 13px; text-decoration: none; }
+
+/* 방명록 */
+.field textarea {
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  outline: none;
+  resize: vertical;
+  min-height: 90px;
+}
+.field textarea:focus { border-color: var(--accent); }
+.field > span { display: flex; justify-content: space-between; }
+.counter { font-style: normal; font-size: 12px; }
+.gb-list { list-style: none; padding: 0; margin: 28px 0 0; text-align: left; display: flex; flex-direction: column; gap: 10px; }
+.gb-list li { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; }
+.gb-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; }
+.gb-head span { font-size: 12px; color: var(--muted); }
+.gb-list p { margin: 6px 0 0; font-size: 14px; white-space: pre-line; word-break: break-word; }
+.gb-empty { color: var(--muted); font-size: 14px; margin: 24px 0 0; }
+
+/* 공유 */
+.share { display: flex; flex-direction: column; gap: 8px; margin-bottom: 28px; }
+.btn.kakao { background: #fee500; color: #191919; }

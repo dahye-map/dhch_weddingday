@@ -49,6 +49,19 @@ window.WEDDING_CONFIG = {
   greeting:
     "서로 다른 길을 걸어온 두 사람이\n이제 같은 길을 함께 걸어가려 합니다.\n\n귀한 걸음 하시어 축복해 주시면\n더없는 기쁨으로 간직하겠습니다.",
 
+  // 예식 소요 시간(분) — 캘린더 일정 길이
+  durationMinutes: 90,
+
+  // 카카오톡 공유 — developers.kakao.com 에서 앱 생성 후 JavaScript 키 입력
+  // (플랫폼 > Web 사이트 도메인에 배포 주소 등록 필요). 비워두면 '링크 복사'로 대신 동작합니다.
+  kakaoKey: "",
+  share: {
+    title: "신랑이름 ♥ 신부이름 결혼합니다",
+    description: "12월 12일 토요일 오후 12시 30분, OO웨딩홀",
+    // 공유 카드 대표 이미지 — 반드시 https:// 로 시작하는 전체 주소 (권장 800x400 이상)
+    imageUrl: "https://example.github.io/dhch_weddingday/images/share.jpg",
+  },
+
   // Google Apps Script 웹앱 URL (apps-script/Code.gs 배포 후 입력)
   // 비워두면 데모 모드로 동작하며, 데이터는 이 브라우저에만 저장됩니다.
   apiUrl: "",

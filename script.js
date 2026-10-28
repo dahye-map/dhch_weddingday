@@ -58,6 +58,16 @@
 
   function demoApi(payload) {
     if (payload.type === "rsvp") return Promise.resolve({ ok: true });
+    if (payload.type === "guestbook_list") {
+      return Promise.resolve({ ok: true, items: store("demo_guestbook") || [] });
+    }
+    if (payload.type === "guestbook_write") {
+      const items = store("demo_guestbook") || [];
+      const item = { name: payload.name, message: payload.message, time: new Date().toISOString() };
+      items.unshift(item);
+      store("demo_guestbook", items);
+      return Promise.resolve({ ok: true, item });
+    }
     const entries = store("demo_lucky_entries") || [];
     const found = entries.find((e) => e.name === payload.name && e.phone4 === payload.phone4);
     if (found) return Promise.resolve({ ok: true, ticket: found.ticket, duplicate: true });
@@ -362,4 +372,171 @@
 
   const savedLucky = store("lucky");
   if (savedLucky) showTicket(savedLucky, "이미 응모하셨어요! 예식 당일 이 번호를 기억해 주세요.");
+
+  // ---------- 캘린더에 추가 ----------
+  const end = new Date(date.getTime() + (C.durationMinutes || 90) * 60000);
+  const utc = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
+  const calTitle = `${C.groom.name} ♥ ${C.bride.name} 결혼식`;
+  const calPlace = `${C.venue} (${C.address})`;
+
+  $("addGoogle").href =
+    "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+    `&text=${encodeURIComponent(calTitle)}` +
+    `&dates=${utc(date)}/${utc(end)}` +
+    `&location=${encodeURIComponent(calPlace)}` +
+    `&details=${encodeURIComponent(location.href.split("#")[0])}`;
+
+  $("addIcs").addEventListener("click", () => {
+    const esc = (t) => t.replace(/[\\,;]/g, "\\$&");
+    const ics = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//wedding-invitation//KO",
+      "BEGIN:VEVENT",
+      `UID:${utc(date)}-wedding@invitation`,
+      `DTSTAMP:${utc(new Date())}`,
+      `DTSTART:${utc(date)}`,
+      `DTEND:${utc(end)}`,
+      `SUMMARY:${esc(calTitle)}`,
+      `LOCATION:${esc(calPlace)}`,
+      // 하루 전 알림
+      "BEGIN:VALARM",
+      "TRIGGER:-P1D",
+      "ACTION:DISPLAY",
+      `DESCRIPTION:${esc(calTitle)}`,
+      "END:VALARM",
+      "END:VEVENT",
+      "END:VCALENDAR",
+    ].join("\r\n");
+    const a = el("a");
+    a.href = "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
+    a.download = "wedding.ics";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  });
+
+  // ---------- 방명록 ----------
+  const gbForm = $("gbForm");
+  const GB_PAGE = 5;
+  let gbItems = [];
+  let gbShown = GB_PAGE;
+
+  function formatTime(iso) {
+    const d = new Date(iso);
+    return isNaN(d) ? "" : `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, "0")}.${String(d.getDate()).padStart(2, "0")}`;
+  }
+
+  function renderGuestbook() {
+    const list = $("gbList");
+    list.textContent = "";
+    gbItems.slice(0, gbShown).forEach((it) => {
+      const li = el("li");
+      const head = el("div", "gb-head");
+      head.append(el("b", null, it.name), el("span", null, formatTime(it.time)));
+      li.append(head, el("p", null, it.message));
+      list.appendChild(li);
+    });
+    $("gbEmpty").hidden = gbItems.length > 0;
+    $("gbMore").hidden = gbItems.length <= gbShown;
+  }
+
+  $("gbMore").addEventListener("click", () => {
+    gbShown += GB_PAGE;
+    renderGuestbook();
+  });
+
+  gbForm.elements.message.addEventListener("input", (e) => {
+    $("gbCounter").textContent = `${e.target.value.length}/200`;
+  });
+
+  gbForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = gbForm.elements.name.value.trim();
+    const message = gbForm.elements.message.value.trim();
+    $("gbError").textContent = "";
+    if (!name) {
+      $("gbError").textContent = "성함을 입력해 주세요.";
+      gbForm.elements.name.focus();
+      return;
+    }
+    if (!message) {
+      $("gbError").textContent = "메세지를 입력해 주세요.";
+      gbForm.elements.message.focus();
+      return;
+    }
+    setBusy(gbForm, true, "남기는 중…");
+    try {
+      const res = await api({ type: "guestbook_write", name, message });
+      gbItems.unshift(res.item);
+      gbShown = Math.max(gbShown, GB_PAGE);
+      renderGuestbook();
+      gbForm.elements.message.value = "";
+      $("gbCounter").textContent = "0/200";
+      toast("축하 메세지가 등록되었어요 💌");
+    } catch (err) {
+      $("gbError").textContent = "등록에 실패했어요. 잠시 후 다시 시도해 주세요.";
+    } finally {
+      setBusy(gbForm, false);
+    }
+  });
+
+  api({ type: "guestbook_list" })
+    .then((res) => {
+      gbItems = res.items || [];
+      renderGuestbook();
+    })
+    .catch(() => {
+      $("gbEmpty").textContent = "방명록을 불러오지 못했어요.";
+      $("gbEmpty").hidden = false;
+    });
+
+  // ---------- 공유하기 ----------
+  const pageUrl = location.href.split("#")[0];
+  let kakaoReady = null;
+
+  // 카카오 SDK는 키가 있을 때만 불러옴
+  function loadKakao() {
+    if (!C.kakaoKey) return Promise.reject(new Error("no key"));
+    if (!kakaoReady) {
+      kakaoReady = new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js";
+        s.onload = () => {
+          if (!window.Kakao.isInitialized()) window.Kakao.init(C.kakaoKey);
+          resolve(window.Kakao);
+        };
+        s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+    return kakaoReady;
+  }
+  if (C.kakaoKey) loadKakao().catch(() => {});
+
+  $("shareKakao").addEventListener("click", async () => {
+    const share = C.share || {};
+    try {
+      const Kakao = await loadKakao();
+      Kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title: share.title,
+          description: share.description,
+          imageUrl: share.imageUrl,
+          link: { mobileWebUrl: pageUrl, webUrl: pageUrl },
+        },
+        buttons: [{ title: "청첩장 보기", link: { mobileWebUrl: pageUrl, webUrl: pageUrl } }],
+      });
+    } catch (err) {
+      // 키가 없거나 SDK를 못 불러오면 기기 기본 공유 → 그것도 안 되면 링크 복사
+      if (navigator.share) {
+        navigator.share({ title: share.title, text: share.description, url: pageUrl }).catch(() => {});
+      } else {
+        copyText(pageUrl, "링크가 복사되었어요. 카카오톡에 붙여넣어 주세요");
+      }
+    }
+  });
+
+  $("shareLink").addEventListener("click", () => copyText(pageUrl, "청첩장 링크가 복사되었어요"));
 })();
