@@ -1,6 +1,6 @@
 // 청첩장 기본 정보 — 이 파일만 수정하면 됩니다.
 window.WEDDING_CONFIG = {
-  // 디자인 테마: "classic" | "minimal" | "winter" | "ginkgo" | "signature" | "spring"
+  // 디자인 테마: "classic" | "minimal" | "winter" | "ginkgo" | "signature" | "spring" | "sky"
   // 주소 뒤에 ?theme=signature 처럼 붙여 열면 화면 아래에 테마 비교 버튼이 나옵니다.
   theme: "ginkgo",
 
