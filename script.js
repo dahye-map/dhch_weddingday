@@ -26,15 +26,20 @@
   $("brideEn").textContent = C.bride.en || C.bride.name;
   $("coverDate").textContent = `${kst.getUTCFullYear()}. ${pad2(kst.getUTCMonth() + 1)}. ${pad2(kst.getUTCDate())}  ${enDays[kst.getUTCDay()]}`;
   $("footerSign").textContent = `${C.groom.en || C.groom.name} & ${C.bride.en || C.bride.name}`;
+  $("coverScript").textContent = C.coverScript || "We're getting married";
   $("bigMD").textContent = `${pad2(kst.getUTCMonth() + 1)}.${pad2(kst.getUTCDate())}`;
   $("bigY").textContent = `${kst.getUTCFullYear()} ${enDays[kst.getUTCDay()]}`;
 
   // ---------- 디자인 테마 ----------
   const THEMES = {
     classic: { label: "클래식", fonts: null },
-    romantic: { label: "로맨틱", fonts: "family=Great+Vibes&family=Gowun+Batang:wght@400;700", fall: "petal" },
     minimal: { label: "미니멀", fonts: "family=Montserrat:wght@300;400;500;600" },
     winter: { label: "윈터", fonts: "family=Playfair+Display:ital,wght@0,400;0,500;1,400", fall: "snow" },
+    signature: {
+      label: "시그니처",
+      fonts: "family=Mrs+Saint+Delafield&family=Jost:wght@300;400;500",
+      kicker: "SAVE THE DATE",
+    },
     ginkgo: {
       label: "은행잎",
       fonts: "family=Song+Myung&family=Gowun+Batang:wght@400;700",
@@ -54,11 +59,11 @@
     const box = document.createElement("div");
     box.className = "fall";
     box.setAttribute("aria-hidden", "true");
-    const n = { snow: 34, petal: 16, ginkgo: 14 }[kind];
+    const n = { snow: 34, ginkgo: 14 }[kind];
     for (let i = 0; i < n; i++) {
       const p = document.createElement("i");
       // 은행잎은 천천히, 고즈넉하게
-      const dur = { snow: 9, petal: 11, ginkgo: 15 }[kind] + Math.random() * 10;
+      const dur = { snow: 9, ginkgo: 15 }[kind] + Math.random() * 10;
       p.style.left = `${Math.random() * 100}%`;
       p.style.animationDuration = `${dur}s`;
       p.style.animationDelay = `${-Math.random() * dur}s`;
