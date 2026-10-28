@@ -5,6 +5,46 @@ window.WEDDING_CONFIG = {
   date: "2026-12-12T12:30:00+09:00",
   venue: "OO웨딩홀 3층 그랜드홀",
   address: "서울특별시 OO구 OO로 123",
+  tel: "02-000-0000",
+  // 예식장 좌표 (지도 표시 · 티맵 길안내용). 네이버/카카오 지도에서 장소 우클릭 → 좌표 확인
+  location: { lat: 37.5665, lng: 126.978 },
+
+  // 오시는 길 안내
+  transport: [
+    { title: "지하철", text: "O호선 OO역 O번 출구 도보 5분" },
+    { title: "버스", text: "OO정류장 하차 · 간선 000, 지선 0000" },
+    { title: "주차", text: "건물 지하 주차장 2시간 무료" },
+  ],
+
+  // 사진 갤러리 — images/gallery 폴더에 사진을 넣고 경로를 적어주세요 (첫 9장이 먼저 보이고 나머지는 '더보기')
+  gallery: [
+    "images/gallery/01.svg",
+    "images/gallery/02.svg",
+    "images/gallery/03.svg",
+    "images/gallery/04.svg",
+    "images/gallery/05.svg",
+    "images/gallery/06.svg",
+    "images/gallery/07.svg",
+    "images/gallery/08.svg",
+    "images/gallery/09.svg",
+    "images/gallery/10.svg",
+    "images/gallery/11.svg",
+    "images/gallery/12.svg",
+  ],
+
+  // 마음 전하실 곳
+  accounts: {
+    groom: [
+      { role: "신랑", name: "신랑이름", bank: "OO은행", number: "000-0000-0000-00" },
+      { role: "신랑 아버지", name: "아버지", bank: "OO은행", number: "000-000000-00-000" },
+      { role: "신랑 어머니", name: "어머니", bank: "OO은행", number: "000000-00-000000" },
+    ],
+    bride: [
+      { role: "신부", name: "신부이름", bank: "OO은행", number: "000-0000-0000-00" },
+      { role: "신부 아버지", name: "아버지", bank: "OO은행", number: "000-000000-00-000" },
+      { role: "신부 어머니", name: "어머니", bank: "OO은행", number: "000000-00-000000" },
+    ],
+  },
 
   greeting:
     "서로 다른 길을 걸어온 두 사람이\n이제 같은 길을 함께 걸어가려 합니다.\n\n귀한 걸음 하시어 축복해 주시면\n더없는 기쁨으로 간직하겠습니다.",

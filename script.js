@@ -78,6 +78,153 @@
     }
   }
 
+  async function copyText(text, msg) {
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch (e) {
+      // 일부 인앱 브라우저(카카오톡 등)는 clipboard API를 막아서 예전 방식으로 복사
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.cssText = "position:fixed;opacity:0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    toast(msg);
+  }
+
+  function el(tag, cls, text) {
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
+  }
+
+  // ---------- 사진 갤러리 ----------
+  const photos = C.gallery || [];
+  const PREVIEW = 9;
+  const grid = $("galleryGrid");
+
+  photos.forEach((src, i) => {
+    const btn = el("button");
+    btn.type = "button";
+    btn.setAttribute("aria-label", `사진 ${i + 1} 크게 보기`);
+    if (i >= PREVIEW) btn.hidden = true;
+    const img = el("img");
+    img.src = src;
+    img.alt = "";
+    img.loading = "lazy";
+    btn.appendChild(img);
+    btn.addEventListener("click", () => openLightbox(i));
+    grid.appendChild(btn);
+  });
+  if (!photos.length) $("gallery").hidden = true;
+
+  if (photos.length > PREVIEW) {
+    $("galleryMore").hidden = false;
+    $("galleryMore").addEventListener("click", () => {
+      grid.querySelectorAll("button[hidden]").forEach((b) => (b.hidden = false));
+      $("galleryMore").hidden = true;
+    });
+  }
+
+  const lb = $("lightbox");
+  let lbIndex = 0;
+
+  function showPhoto(i) {
+    lbIndex = (i + photos.length) % photos.length;
+    $("lbImg").src = photos[lbIndex];
+    $("lbCount").textContent = `${lbIndex + 1} / ${photos.length}`;
+  }
+  function openLightbox(i) {
+    showPhoto(i);
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+  function closeLightbox() {
+    lb.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  $("lbClose").addEventListener("click", closeLightbox);
+  $("lbPrev").addEventListener("click", () => showPhoto(lbIndex - 1));
+  $("lbNext").addEventListener("click", () => showPhoto(lbIndex + 1));
+  lb.addEventListener("click", (e) => e.target === lb && closeLightbox());
+  document.addEventListener("keydown", (e) => {
+    if (lb.hidden) return;
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") showPhoto(lbIndex - 1);
+    if (e.key === "ArrowRight") showPhoto(lbIndex + 1);
+  });
+
+  // 좌우 스와이프
+  let touchX = null;
+  lb.addEventListener("touchstart", (e) => (touchX = e.touches[0].clientX), { passive: true });
+  lb.addEventListener("touchend", (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 40) showPhoto(lbIndex + (dx < 0 ? 1 : -1));
+    touchX = null;
+  });
+
+  // ---------- 오시는 길 ----------
+  const loc = C.location;
+  const q = encodeURIComponent(C.address);
+  const venueQ = encodeURIComponent(C.venue.split(" ")[0]);
+
+  $("locVenue").textContent = C.venue;
+  $("locAddress").textContent = C.address;
+  $("copyAddress").addEventListener("click", () => copyText(C.address, "주소가 복사되었어요"));
+  if (C.tel) {
+    $("locTel").textContent = `Tel. ${C.tel}`;
+    $("locTel").href = `tel:${C.tel.replace(/[^\d+]/g, "")}`;
+  }
+
+  $("mapFrame").src = loc
+    ? `https://maps.google.com/maps?q=${loc.lat},${loc.lng}&z=16&output=embed`
+    : `https://maps.google.com/maps?q=${q}&z=16&output=embed`;
+  $("naverMap").href = `https://map.naver.com/p/search/${q}`;
+  $("kakaoMap").href = loc
+    ? `https://map.kakao.com/link/map/${venueQ},${loc.lat},${loc.lng}`
+    : `https://map.kakao.com/link/search/${q}`;
+
+  // 티맵은 앱 전용이라 좌표가 있을 때만 길안내, 앱이 없으면 설치 페이지로
+  $("tmap").addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!loc) return copyText(C.address, "주소를 복사했어요. 티맵에 붙여넣어 주세요");
+    const opened = Date.now();
+    location.href = `tmap://route?goalname=${venueQ}&goalx=${loc.lng}&goaly=${loc.lat}`;
+    setTimeout(() => {
+      if (!document.hidden && Date.now() - opened < 2000) {
+        toast("티맵 앱이 설치되어 있지 않아요");
+      }
+    }, 1500);
+  });
+
+  (C.transport || []).forEach((t) => {
+    const row = el("div");
+    row.append(el("dt", null, t.title), el("dd", null, t.text));
+    $("transport").appendChild(row);
+  });
+
+  // ---------- 마음 전하실 곳 ----------
+  function renderAccounts(list, target) {
+    (list || []).forEach((a) => {
+      const li = el("li");
+      const info = el("div", "account-info");
+      info.append(el("div", "role", `${a.role} · ${a.name}`), el("div", "num", `${a.bank} ${a.number}`));
+      const btn = el("button", "chip", "복사");
+      btn.type = "button";
+      btn.addEventListener("click", () => copyText(`${a.bank} ${a.number}`, `${a.role} 계좌번호가 복사되었어요`));
+      li.append(info, btn);
+      $(target).appendChild(li);
+    });
+  }
+  renderAccounts(C.accounts && C.accounts.groom, "groomAccounts");
+  renderAccounts(C.accounts && C.accounts.bride, "brideAccounts");
+
   // ---------- 1. 참석 여부 ----------
   const rsvpForm = $("rsvpForm");
   const attendOnly = rsvpForm.querySelector(".attend-only");
