@@ -7,7 +7,7 @@ window.WEDDING_CONFIG = {
   groom: { name: "신랑이름", en: "Groom", parents: "아버지 · 어머니의 아들" },
   bride: { name: "신부이름", en: "Bride", parents: "아버지 · 어머니의 딸" },
   // 커버 대표 사진 (세로 사진 권장, 3:4 비율)
-  coverImage: "images/cover.svg",
+  coverImage: "images/cover.jpg",
   // 시그니처 테마에서 커버 사진 위에 필기체로 들어가는 문구
   coverScript: "We're getting married",
   date: "2026-12-12T12:30:00+09:00",

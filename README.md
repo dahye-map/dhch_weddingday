@@ -43,7 +43,7 @@
 커버의 영문 이름은 `config.js`의 `groom.en`, `bride.en`에서 수정하세요.
 
 ## 사진 바꾸기
-- **커버 대표 사진:** `images/`에 세로 사진(3:4 비율 권장)을 넣고 `config.js`의 `coverImage`를 그 경로로 바꾸세요.
+- **커버 대표 사진:** `images/cover.jpg` (세로 사진 권장). 바꾸려면 파일을 교체하거나 `config.js`의 `coverImage` 경로를 바꾸세요.
 - **갤러리:** `images/gallery/`에 사진(jpg 등)을 넣고 `config.js`의 `gallery` 목록을 그 파일명으로 바꾸세요. 첫 번째 사진은 크게 보입니다.
 모바일 로딩 속도를 위해 사진은 가로 1200px 이하, 장당 500KB 안팎으로 줄여서 넣는 걸 권장합니다.
 
@@ -70,3 +70,7 @@
 
 ## 배포 (GitHub Pages)
 저장소 **Settings > Pages > Branch: main / (root)** 선택 → `https://<계정>.github.io/dhch_weddingday/`
+
+## 검색엔진 노출
+`index.html`에 `noindex` 메타 태그가 있어 구글·네이버 검색 결과에 나오지 않습니다. 링크를 받은 사람만 볼 수 있어요.
+(GitHub 저장소 자체는 공개 상태이므로 저장소 페이지는 검색될 수 있습니다.)
